@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { Metadata } from 'next';
+import Script from 'next/script';
 
 export const revalidate = 60;
 
@@ -30,7 +31,10 @@ export async function generateMetadata({ params }: PublicPortfolioPageProps): Pr
       tagline: true, 
       bio: true, 
       profileImageUrl: true,
-      isPublished: true 
+      isPublished: true,
+      metaTitle: true,
+      metaDescription: true,
+      metaKeywords: true
     }
   });
 
@@ -39,13 +43,16 @@ export async function generateMetadata({ params }: PublicPortfolioPageProps): Pr
   }
 
   const name = portfolio.fullName || portfolio.username;
-  const description = portfolio.tagline || (portfolio.bio ? portfolio.bio.slice(0, 160) : `Portofolio dari ${name}`);
+  const title = portfolio.metaTitle || `${name} — Portofolio`;
+  const description = portfolio.metaDescription || portfolio.tagline || (portfolio.bio ? portfolio.bio.slice(0, 160) : `Portofolio dari ${name}`);
+  const keywords = portfolio.metaKeywords || undefined;
 
   return {
-    title: `${name} — Portofolio`,
+    title,
     description,
+    keywords,
     openGraph: {
-      title: `${name} — Portofolio`,
+      title,
       description,
       images: portfolio.profileImageUrl ? [portfolio.profileImageUrl] : [],
       type: 'website',
@@ -79,6 +86,22 @@ export default async function PublicPortfolioPage({ params }: PublicPortfolioPag
 
   return (
     <>
+      {portfolio.googleAnalyticsId && (
+        <>
+          <Script
+            src={`https://www.googletagmanager.com/gtag/js?id=${portfolio.googleAnalyticsId}`}
+            strategy="afterInteractive"
+          />
+          <Script id="google-analytics" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${portfolio.googleAnalyticsId}');
+            `}
+          </Script>
+        </>
+      )}
       <ThemeInjector theme={portfolio.theme} font={portfolio.font} />
       <Navbar ownerName={ownerName} />
       

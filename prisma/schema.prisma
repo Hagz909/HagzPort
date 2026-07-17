@@ -99,6 +99,12 @@ model Portfolio {
   theme                String   @default("cyan")
   font                 String   @default("modern")
 
+  // SEO & Analytics
+  metaTitle            String?
+  metaDescription      String?
+  metaKeywords         String?
+  googleAnalyticsId    String?
+
   isPublished          Boolean  @default(false)
   usernameChangedAt    DateTime? // Catat perubahan username per portfolio
   createdAt            DateTime @default(now())

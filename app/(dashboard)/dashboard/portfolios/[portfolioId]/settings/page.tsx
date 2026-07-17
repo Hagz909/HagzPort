@@ -14,6 +14,10 @@ const settingsSchema = z.object({
   username: z.string().min(3, 'Username minimal 3 karakter').max(30).regex(/^[a-zA-Z0-9_-]+$/, 'Hanya huruf, angka, strip, dan underscore'),
   isPublished: z.boolean(),
   isDefault: z.boolean(),
+  metaTitle: z.string().max(150, 'Maksimal 150 karakter').optional().or(z.literal('')),
+  metaDescription: z.string().max(300, 'Maksimal 300 karakter').optional().or(z.literal('')),
+  metaKeywords: z.string().max(200, 'Maksimal 200 karakter').optional().or(z.literal('')),
+  googleAnalyticsId: z.string().max(50, 'Maksimal 50 karakter').optional().or(z.literal('')),
 });
 
 type SettingsFormValues = z.infer<typeof settingsSchema>;
@@ -40,6 +44,10 @@ export default function SettingsPage({ params }: { params: Promise<{ portfolioId
       username: '',
       isPublished: false,
       isDefault: false,
+      metaTitle: '',
+      metaDescription: '',
+      metaKeywords: '',
+      googleAnalyticsId: '',
     },
   });
 
@@ -72,6 +80,10 @@ export default function SettingsPage({ params }: { params: Promise<{ portfolioId
               username: p.username || '',
               isPublished: p.isPublished || false,
               isDefault: p.isDefault || false,
+              metaTitle: p.metaTitle || '',
+              metaDescription: p.metaDescription || '',
+              metaKeywords: p.metaKeywords || '',
+              googleAnalyticsId: p.googleAnalyticsId || '',
             });
           }
         }
@@ -208,6 +220,79 @@ export default function SettingsPage({ params }: { params: Promise<{ portfolioId
               {errors.username && (
                 <p className="mt-1 text-sm text-red-400">{errors.username.message}</p>
               )}
+            </div>
+          </div>
+
+          {/* SEO & Google Analytics Section */}
+          <div className="border-t border-zinc-800 pt-6 space-y-6">
+            <div>
+              <h3 className="text-sm font-semibold text-zinc-300">Pengaturan SEO (Search Engine Optimization)</h3>
+              <p className="text-xs text-zinc-500 mt-1">Mengoptimalkan portofolio Anda agar mudah ditemukan di Google.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-zinc-300">
+                  Meta Title (Judul Google)
+                </label>
+                <input
+                  type="text"
+                  {...register('metaTitle')}
+                  className={`input-field mt-1 ${errors.metaTitle ? 'border-red-500' : ''}`}
+                  placeholder="Cth: Muhammad Ilham | Senior IoT Engineer & Web Developer"
+                />
+                {errors.metaTitle && (
+                  <p className="mt-1 text-sm text-red-400">{errors.metaTitle.message}</p>
+                )}
+                <p className="text-xs text-zinc-500 mt-1">Judul yang akan ditampilkan di tab browser dan hasil pencarian Google.</p>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-zinc-300">
+                  Meta Keywords
+                </label>
+                <input
+                  type="text"
+                  {...register('metaKeywords')}
+                  className={`input-field mt-1 ${errors.metaKeywords ? 'border-red-500' : ''}`}
+                  placeholder="Cth: IoT, Web Developer, React, Portofolio"
+                />
+                {errors.metaKeywords && (
+                  <p className="mt-1 text-sm text-red-400">{errors.metaKeywords.message}</p>
+                )}
+                <p className="text-xs text-zinc-500 mt-1">Kata kunci yang dipisahkan dengan koma.</p>
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-zinc-300">
+                  Meta Description (Deskripsi Google)
+                </label>
+                <textarea
+                  {...register('metaDescription')}
+                  className={`input-field mt-1 h-20 resize-none ${errors.metaDescription ? 'border-red-500' : ''}`}
+                  placeholder="Cth: Portofolio profesional Ilham Musyaffa. Berpengalaman 5 tahun dalam pembuatan sistem IoT dan pengembangan web full-stack."
+                />
+                {errors.metaDescription && (
+                  <p className="mt-1 text-sm text-red-400">{errors.metaDescription.message}</p>
+                )}
+                <p className="text-xs text-zinc-500 mt-1">Deskripsi singkat di bawah judul pencarian Google. Disarankan maksimal 160 karakter.</p>
+              </div>
+
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-zinc-300">
+                  Google Analytics Tracking ID (Measurement ID)
+                </label>
+                <input
+                  type="text"
+                  {...register('googleAnalyticsId')}
+                  className={`input-field mt-1 ${errors.googleAnalyticsId ? 'border-red-500' : ''}`}
+                  placeholder="Cth: G-XXXXXXXXXX"
+                />
+                {errors.googleAnalyticsId && (
+                  <p className="mt-1 text-sm text-red-400">{errors.googleAnalyticsId.message}</p>
+                )}
+                <p className="text-xs text-zinc-500 mt-1">Masukkan ID pengukuran Google Analytics 4 Anda untuk memantau kunjungan secara langsung.</p>
+              </div>
             </div>
           </div>
 

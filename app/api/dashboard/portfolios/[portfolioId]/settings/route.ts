@@ -17,6 +17,10 @@ const settingsSchema = z.object({
   skills: z.array(z.string()).optional(),
   theme: z.string().optional(),
   font: z.string().optional(),
+  metaTitle: z.string().max(150).nullable().optional(),
+  metaDescription: z.string().max(300).nullable().optional(),
+  metaKeywords: z.string().max(200).nullable().optional(),
+  googleAnalyticsId: z.string().max(50).nullable().optional(),
 });
 
 export async function PATCH(
@@ -74,6 +78,10 @@ export async function PATCH(
         skills: data.skills !== undefined ? data.skills : undefined,
         theme: data.theme !== undefined ? data.theme : undefined,
         font: data.font !== undefined ? data.font : undefined,
+        metaTitle: data.metaTitle !== undefined ? data.metaTitle : undefined,
+        metaDescription: data.metaDescription !== undefined ? data.metaDescription : undefined,
+        metaKeywords: data.metaKeywords !== undefined ? data.metaKeywords : undefined,
+        googleAnalyticsId: data.googleAnalyticsId !== undefined ? data.googleAnalyticsId : undefined,
       },
     });
 
