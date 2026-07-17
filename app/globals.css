@@ -1,0 +1,237 @@
+@import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Montenegrin+Gothic+One&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Saira+Stencil+One&display=swap');
+@import "tailwindcss";
+
+@layer utilities {
+  .montenegrin-gothic-one-regular {
+    font-family: "Montenegrin Gothic One", serif !important;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .google-sans-flex-regular {
+    font-family: "Google Sans Flex", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+      "slnt" 0,
+      "wdth" 100,
+      "GRAD" 0,
+      "ROND" 0;
+  }
+
+  .saira-stencil {
+    font-family: "Saira Stencil One", sans-serif !important;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+  }
+
+  .aldrich-regular {
+    font-family: "Aldrich", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .prompt-thin {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 100;
+    font-style: normal;
+  }
+
+  .prompt-extralight {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  .prompt-light {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 300;
+    font-style: normal;
+  }
+
+  .prompt-regular {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  .prompt-medium {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  .prompt-semibold {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .prompt-bold {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  .prompt-extrabold {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 800;
+    font-style: normal;
+  }
+
+  .prompt-black {
+    font-family: "Prompt", sans-serif !important;
+    font-weight: 900;
+    font-style: normal;
+  }
+}
+
+
+@theme {
+  --color-zinc-50: #fafafa;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+
+  --color-green-500: #22c55e;
+  --color-amber-500: #f59e0b;
+  --color-red-500: #ef4444;
+
+  --color-primary-400: var(--theme-primary-400, #22d3ee); /* Default: cyan-400 */
+  --color-primary-500: var(--theme-primary-500, #06b6d4); /* Default: cyan-500 */
+  --color-primary-600: var(--theme-primary-600, #0891b2); /* Default: cyan-600 */
+  --color-secondary-500: var(--theme-secondary-500, #3b82f6); /* Default: blue-500 */
+  --color-secondary-600: var(--theme-secondary-600, #2563eb); /* Default: blue-600 */
+
+  --font-sans: var(--theme-font-body, "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-heading: var(--theme-font-heading, "Montenegrin Gothic One", serif);
+}
+
+/* Always Dark Mode Settings */
+:root {
+  background-color: var(--color-zinc-950);
+  color: var(--color-zinc-50);
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer components {
+  /* Button Variants */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 disabled:pointer-events-none disabled:opacity-50 h-9 px-4 py-2;
+  }
+  
+  .btn-primary {
+    @apply relative overflow-hidden bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-xl hover:-translate-y-0.5 transition-all duration-300 shadow-[0_0_20px_color-mix(in_srgb,var(--color-primary-500)_30%,transparent)] hover:shadow-[0_0_30px_color-mix(in_srgb,var(--color-primary-500)_30%,transparent)];
+  }
+  
+  .btn-secondary {
+    @apply bg-zinc-800/80 backdrop-blur-sm text-zinc-50 border border-zinc-700/80 hover:bg-zinc-700 hover:border-primary-500/50 hover:shadow-[0_0_15px_color-mix(in_srgb,var(--color-primary-500)_30%,transparent)] rounded-xl transition-all duration-300;
+  }
+  
+  .btn-danger {
+    @apply bg-red-500/10 text-red-400 hover:bg-red-500/20 rounded-xl transition-all duration-300;
+  }
+  
+  .btn-ghost {
+    @apply hover:bg-zinc-800/80 backdrop-blur-sm hover:text-zinc-50 rounded-xl transition-all duration-300;
+  }
+
+  /* Form Elements */
+  .input-field {
+    @apply flex w-full rounded-xl border border-zinc-800 bg-zinc-950/60 px-4 py-3 text-sm text-zinc-100 placeholder:text-zinc-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50 focus:bg-zinc-900 shadow-inner hover:border-zinc-700 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  /* Cards */
+  .card {
+    @apply rounded-2xl border border-zinc-800/50 bg-zinc-900/40 backdrop-blur-xl text-zinc-50 shadow-2xl hover:shadow-[0_10px_40px_color-mix(in_srgb,var(--color-primary-500)_30%,transparent)] hover:border-zinc-700/50 transition-all duration-300;
+  }
+}
+
+/* Animations and Custom Styles for Cyberpunk UI */
+@layer utilities {
+  .btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(transparent, rgba(255,255,255,0.2), transparent);
+    transform: rotate(30deg) translateX(-100%);
+    transition: transform 0.6s ease-in-out;
+  }
+  .btn-shimmer:hover:not(:disabled)::after { 
+    transform: rotate(30deg) translateX(100%); 
+  }
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.12;
+    background: var(--color-primary-500);
+    animation: float 8s ease-in-out infinite;
+  }
+  .orb-1 { width: 300px; height: 300px; top: -10%; left: -10%; animation-delay: 0s; }
+  .orb-2 { width: 250px; height: 250px; bottom: 10%; right: -5%; animation-delay: -3s; }
+  .orb-3 { width: 200px; height: 200px; top: 50%; left: 60%; animation-delay: -6s; opacity: 0.08; }
+
+  .animate-cardEntrance {
+    animation: cardEntrance 0.7s ease-out forwards;
+  }
+  
+  .animate-scanline {
+    animation: scanline 10s linear infinite;
+  }
+  .animate-scanline-delayed {
+    animation: scanline 15s linear infinite;
+    animation-delay: -5s;
+  }
+  
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .transform-style-preserve-3d {
+    transform-style: preserve-3d;
+  }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  50% { transform: translateY(-25px) scale(1.05); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardEntrance {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}

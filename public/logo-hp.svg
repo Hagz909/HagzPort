@@ -1,0 +1,12 @@
+<svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hp-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+  <path d="M10 6v28" stroke="url(#hp-grad)" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" />
+  <path d="M22 6v28" stroke="url(#hp-grad)" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" />
+  <path d="M10 20h12" stroke="url(#hp-grad)" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" />
+  <path d="M22 6h8a7 7 0 0 1 0 14h-8" stroke="url(#hp-grad)" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter" />
+</svg>

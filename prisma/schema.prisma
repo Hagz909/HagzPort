@@ -1,0 +1,282 @@
+// prisma/schema.prisma
+// Dynamic Portfolio Builder & CMS — PRD v1.2.0
+// JANGAN UBAH TANPA INSTRUKSI — ini adalah source of truth database
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // url dan directUrl diatur di prisma.config.ts (Prisma v7)
+}
+
+
+// ============================================================
+// ENUM
+// ============================================================
+
+enum Role {
+  ADMIN
+  USER
+}
+
+// ============================================================
+// TABLE: users
+// ============================================================
+
+model User {
+  id                  String      @id @default(cuid())
+  name                String
+  email               String      @unique
+  password            String      // Hashed bcrypt 12 rounds
+  role                Role        @default(USER)
+  isActive            Boolean     @default(true)
+  emailVerified       DateTime?
+  emailNotification   Boolean     @default(true)   // Resend.com toggle
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  // Relations
+  portfolios          Portfolio[]  // 1:N — satu user bisa punya banyak portfolio
+  sessions            Session[]
+  notifications       Notification[]
+  activityBackups     ActivityBackup[]
+  hasDismissedFeedback Boolean    @default(false)
+  feedback            UserFeedback?
+
+  @@map("users")
+}
+
+// ============================================================
+// TABLE: sessions
+// ============================================================
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+// ============================================================
+// TABLE: portfolios
+// Relasi 1:N — userId TIDAK @unique, satu user bisa punya banyak portfolio
+// ============================================================
+
+model Portfolio {
+  id                   String   @id @default(cuid())
+  userId               String   // FK ke User — TIDAK @unique (1:N)
+
+  username             String   @unique  // Slug URL publik: /[username]
+  displayName          String?           // "Portfolio Software" / "Portfolio IoT"
+  isDefault            Boolean  @default(false)  // Tepat 1 per user
+
+  // Biodata
+  fullName             String?
+  phone                String?
+  address              String?
+  cvUrl                String?
+  skills               String[]
+
+  // Hero
+  tagline              String?
+  quote                String?
+  profileImageUrl      String?
+  profileImagePublicId String?  // Cloudinary public_id untuk delete
+
+  // About
+  bio                  String?  @db.Text
+  linkedinUrl          String?
+  githubUrl            String?
+
+  // Appearance
+  theme                String   @default("cyan")
+  font                 String   @default("modern")
+
+  isPublished          Boolean  @default(false)
+  usernameChangedAt    DateTime? // Catat perubahan username per portfolio
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  // Relations
+  user                 User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  educations           Education[]
+  workExperiences      WorkExperience[]
+  projects             Project[]
+  contactMessages      ContactMessage[]
+  generatedCVs         GeneratedCV[]
+
+  @@map("portfolios")
+}
+
+// ============================================================
+// TABLE: educations
+// ============================================================
+
+model Education {
+  id              String   @id @default(cuid())
+  portfolioId     String
+
+  institutionName String
+  degree          String?
+  nim             String?
+  currentSemester Int?
+  startYear       Int?
+  endYear         Int?     // null = masih aktif
+  logoUrl         String?
+  logoPublicId    String?  // Cloudinary public_id
+  description     String?  @db.Text
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  portfolio       Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("educations")
+}
+
+// ============================================================
+// TABLE: work_experiences
+// ============================================================
+
+model WorkExperience {
+  id              String   @id @default(cuid())
+  portfolioId     String
+
+  companyName     String
+  position        String
+  startYear       Int?
+  endYear         Int?     // null = masih aktif
+  description     String?  @db.Text
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  portfolio       Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("work_experiences")
+}
+
+// ============================================================
+// TABLE: projects
+// ============================================================
+
+model Project {
+  id            String   @id @default(cuid())
+  portfolioId   String
+
+  title         String
+  description   String?  @db.Text
+  imageUrl      String?
+  imagePublicId String?  // Cloudinary public_id
+  techStack     String[] // PostgreSQL native array
+  demoUrl       String?
+  repoUrl       String?
+  wokwiEmbedUrl String?  // IoT Circuit Simulator embed URL
+  isFeatured    Boolean  @default(false)
+  order         Int      @default(0)  // Urutan tampil di halaman publik
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  portfolio     Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("projects")
+}
+
+// ============================================================
+// TABLE: contact_messages
+// ============================================================
+
+model ContactMessage {
+  id          String   @id @default(cuid())
+  portfolioId String   // Pesan masuk ke portfolio spesifik ini
+
+  senderName  String
+  senderEmail String
+  subject     String?
+  message     String   @db.Text
+  isRead      Boolean  @default(false)
+  ipAddress   String?  // Anti-spam audit
+
+  createdAt   DateTime @default(now())
+
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("contact_messages")
+}
+
+// ============================================================
+// TABLE: generated_cvs
+// ============================================================
+
+model GeneratedCV {
+  id          String   @id @default(cuid())
+  portfolioId String   // Portfolio yang dijadikan sumber CV
+
+  title       String   // Nama file CV (contoh: "Resume - John Doe")
+  publicUrl   String   // URL untuk akses / print PDF
+  
+  createdAt   DateTime @default(now())
+
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("generated_cvs")
+}
+
+// ============================================================
+// TABLE: notifications
+// ============================================================
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String?
+  message   String   @db.Text
+  type      String   // e.g. "portfolio", "message", "system", "cv"
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+// ============================================================
+// TABLE: activity_backups
+// ============================================================
+
+model ActivityBackup {
+  id          String   @id @default(cuid())
+  userId      String   // Admin yang melakukan backup/archive
+  rangeStart  DateTime
+  rangeEnd    DateTime
+  recordCount Int
+  data        Json     // JSON stringified log aktivitas
+  createdAt   DateTime @default(now())
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("activity_backups")
+}
+
+// ============================================================
+// TABLE: user_feedbacks
+// ============================================================
+
+model UserFeedback {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  rating    Int      // 1 to 5
+  comment   String?  @db.Text
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_feedbacks")
+}
