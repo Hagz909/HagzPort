@@ -5,6 +5,10 @@ const THEME_MAP: Record<string, { primary400: string, primary500: string, primar
   emerald: { primary400: '#34d399', primary500: '#10b981', primary600: '#059669', secondary500: '#14b8a6', secondary600: '#0d9488' },
   amethyst: { primary400: '#e879f9', primary500: '#d946ef', primary600: '#c026d3', secondary500: '#8b5cf6', secondary600: '#7c3aed' },
   sunset: { primary400: '#fb923c', primary500: '#f97316', primary600: '#ea580c', secondary500: '#f43f5e', secondary600: '#e11d48' },
+  sapphire: { primary400: '#60a5fa', primary500: '#3b82f6', primary600: '#2563eb', secondary500: '#22d3ee', secondary600: '#06b6d4' },
+  ruby: { primary400: '#f87171', primary500: '#ef4444', primary600: '#dc2626', secondary500: '#fb923c', secondary600: '#f97316' },
+  amber: { primary400: '#fbbf24', primary500: '#f59e0b', primary600: '#d97706', secondary500: '#34d399', secondary600: '#10b981' },
+  sakura: { primary400: '#f472b6', primary500: '#ec4899', primary600: '#db2777', secondary500: '#e879f9', secondary600: '#d946ef' },
 };
 
 const FONT_MAP: Record<string, { heading: string, body: string }> = {

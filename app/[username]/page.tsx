@@ -3,8 +3,6 @@ import { prisma } from '@/lib/prisma';
 import { Metadata } from 'next';
 import Script from 'next/script';
 
-export const revalidate = 60;
-
 import { Navbar } from '@/components/public/Navbar';
 import { HeroSection } from '@/components/public/HeroSection';
 import { AboutSection } from '@/components/public/AboutSection';
@@ -15,6 +13,9 @@ import { Footer } from '@/components/public/Footer';
 import { ExperienceSection } from '@/components/public/ExperienceSection';
 import { SkillsSection } from '@/components/public/SkillsSection';
 import { ThemeInjector } from '@/components/public/ThemeInjector';
+import { TestimonialsSection } from '@/components/public/TestimonialsSection';
+
+export const revalidate = 60;
 
 interface PublicPortfolioPageProps {
   params: Promise<{ username: string }>;
@@ -74,6 +75,9 @@ export default async function PublicPortfolioPage({ params }: PublicPortfolioPag
       },
       projects: {
         orderBy: { order: 'asc' }
+      },
+      testimonials: {
+        orderBy: { createdAt: 'desc' }
       }
     }
   });
@@ -131,6 +135,8 @@ export default async function PublicPortfolioPage({ params }: PublicPortfolioPag
         <SkillsSection skills={portfolio.skills} />
         
         <ProjectsSection projects={portfolio.projects} />
+        
+        <TestimonialsSection testimonials={portfolio.testimonials} />
         
         <ContactSection portfolioId={portfolio.id} />
       </main>

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { 
   ArrowLeft, FileText, Image as ImageIcon, 
   User, GraduationCap, Code, Mail, Settings,
-  Globe, Eye, Palette
+  Globe, Eye, Palette, Quote
 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
@@ -38,6 +38,7 @@ export function PortfolioSidebar({
     { name: 'Pendidikan', href: `${basePath}/education`, icon: GraduationCap },
     { name: 'Keahlian', href: `${basePath}/skills`, icon: Code },
     { name: 'Proyek', href: `${basePath}/projects`, icon: Code },
+    { name: 'Testimonial Klien', href: `${basePath}/testimonials`, icon: Quote },
     { name: 'Tampilan', href: `${basePath}/appearance`, icon: Palette },
     { name: 'Pratinjau (Preview)', href: `${basePath}/preview`, icon: Eye },
     { name: 'Pengaturan', href: `${basePath}/settings`, icon: Settings },

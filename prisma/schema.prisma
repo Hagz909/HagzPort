@@ -117,6 +117,7 @@ model Portfolio {
   projects             Project[]
   contactMessages      ContactMessage[]
   generatedCVs         GeneratedCV[]
+  testimonials         Testimonial[]
 
   @@map("portfolios")
   @@index([userId])
@@ -294,4 +295,24 @@ model UserFeedback {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("user_feedbacks")
+}
+
+// ============================================================
+// TABLE: testimonials
+// ============================================================
+
+model Testimonial {
+  id          String    @id @default(cuid())
+  portfolioId String
+
+  clientName  String
+  clientRole  String?   // e.g. "CEO of TechCorp"
+  quote       String    @db.Text
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+
+  @@map("testimonials")
+  @@index([portfolioId])
 }

@@ -11,6 +11,10 @@ const THEMES = [
   { id: 'emerald', name: 'Emerald Green', primary: 'bg-emerald-500', secondary: 'bg-teal-600' },
   { id: 'amethyst', name: 'Amethyst Purple', primary: 'bg-fuchsia-500', secondary: 'bg-violet-600' },
   { id: 'sunset', name: 'Sunset Orange', primary: 'bg-orange-500', secondary: 'bg-rose-600' },
+  { id: 'sapphire', name: 'Sapphire Blue', primary: 'bg-blue-500', secondary: 'bg-cyan-500' },
+  { id: 'ruby', name: 'Ruby Red', primary: 'bg-red-500', secondary: 'bg-orange-500' },
+  { id: 'amber', name: 'Amber Gold', primary: 'bg-amber-500', secondary: 'bg-emerald-500' },
+  { id: 'sakura', name: 'Sakura Pink', primary: 'bg-pink-500', secondary: 'bg-fuchsia-500' },
 ];
 
 const FONTS = [
