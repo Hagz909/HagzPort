@@ -20,12 +20,26 @@ export default function DashboardLayoutClient({
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [notifications, setNotifications] = useState<any[]>([]);
 
+  // Fetch awal saat halaman dimuat (mount) untuk mendapatkan unread badge count
   useEffect(() => {
-    fetch('/api/notifications')
-      .then(res => res.json())
-      .then(data => setNotifications(data.notifications || []))
-      .catch(() => {});
-  }, [isNotificationOpen]); // Re-fetch saat dropdown notifikasi dibuka
+    const loadNotifications = () => {
+      fetch('/api/notifications')
+        .then(res => res.json())
+        .then(data => setNotifications(data.notifications || []))
+        .catch(() => {});
+    };
+    loadNotifications();
+  }, []);
+
+  // Re-fetch hanya ketika menu dropdown notifikasi DIBUKA (isNotificationOpen === true)
+  useEffect(() => {
+    if (isNotificationOpen) {
+      fetch('/api/notifications')
+        .then(res => res.json())
+        .then(data => setNotifications(data.notifications || []))
+        .catch(() => {});
+    }
+  }, [isNotificationOpen]);
 
   const markAllAsRead = async () => {
     try {

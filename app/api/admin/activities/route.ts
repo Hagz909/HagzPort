@@ -11,21 +11,26 @@ export async function GET(req: Request) {
       return NextResponse.json({ message: 'Akses ditolak' }, { status: 403 });
     }
 
-    // Ambil SEMUA aktivitas (notifikasi) untuk admin ini, urutkan dari terbaru
-    const allActivities = await prisma.notification.findMany({
-      where: { userId: session.user.id },
-      orderBy: { createdAt: 'desc' },
+    // Hitung total notifikasi untuk admin ini
+    const count = await prisma.notification.count({
+      where: { userId: session.user.id }
     });
 
-    // Batasi 15 untuk ditampilkan di UI
-    const visibleActivities = allActivities.slice(0, 15);
-    
-    // Aktivitas yang "tenggelam" (lebih dari 15)
-    const sinkingActivities = allActivities.slice(15);
+    let visibleActivities;
 
-    // Jika aktivitas yang tenggelam mencapai threshold (misal >= 50)
-    // Kita bundel menjadi 1 dokumen backup
-    if (sinkingActivities.length >= 50) {
+    if (count >= 65) {
+      // Ambil SEMUA aktivitas (notifikasi) untuk admin ini, urutkan dari terbaru
+      const allActivities = await prisma.notification.findMany({
+        where: { userId: session.user.id },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      // Batasi 15 untuk ditampilkan di UI
+      visibleActivities = allActivities.slice(0, 15);
+      
+      // Aktivitas yang "tenggelam" (lebih dari 15)
+      const sinkingActivities = allActivities.slice(15);
+
       // Ambil 50 data terlama dari yang tenggelam
       // sinkingActivities sudah diurutkan dari terbaru ke terlama
       // Jadi kita ambil 50 dari ujung array (paling lama)
@@ -41,7 +46,7 @@ export async function GET(req: Request) {
           rangeStart,
           rangeEnd,
           recordCount: itemsToBackup.length,
-          data: itemsToBackup, // Menyimpan seluruh JSON
+          data: itemsToBackup as any, // Menyimpan seluruh JSON
         }
       });
 
@@ -54,6 +59,13 @@ export async function GET(req: Request) {
       });
       
       console.log(`[AUTO-ARCHIVE] 50 aktivitas admin ${session.user.id} berhasil dibackup.`);
+    } else {
+      // Jika di bawah threshold, ambil hanya 15 data teratas saja (Lebih cepat & hemat memori)
+      visibleActivities = await prisma.notification.findMany({
+        where: { userId: session.user.id },
+        orderBy: { createdAt: 'desc' },
+        take: 15
+      });
     }
 
     return NextResponse.json({ activities: visibleActivities });

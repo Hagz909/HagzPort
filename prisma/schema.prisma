@@ -61,6 +61,7 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("sessions")
+  @@index([userId])
 }
 
 // ============================================================
@@ -112,6 +113,7 @@ model Portfolio {
   generatedCVs         GeneratedCV[]
 
   @@map("portfolios")
+  @@index([userId])
 }
 
 // ============================================================
@@ -138,6 +140,7 @@ model Education {
   portfolio       Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
   @@map("educations")
+  @@index([portfolioId])
 }
 
 // ============================================================
@@ -160,6 +163,7 @@ model WorkExperience {
   portfolio       Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
   @@map("work_experiences")
+  @@index([portfolioId])
 }
 
 // ============================================================
@@ -187,6 +191,7 @@ model Project {
   portfolio     Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
   @@map("projects")
+  @@index([portfolioId])
 }
 
 // ============================================================
@@ -209,6 +214,7 @@ model ContactMessage {
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
   @@map("contact_messages")
+  @@index([portfolioId, isRead])
 }
 
 // ============================================================
@@ -227,6 +233,7 @@ model GeneratedCV {
   portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
 
   @@map("generated_cvs")
+  @@index([portfolioId])
 }
 
 // ============================================================
@@ -245,6 +252,7 @@ model Notification {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("notifications")
+  @@index([userId, createdAt])
 }
 
 // ============================================================
@@ -263,6 +271,7 @@ model ActivityBackup {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("activity_backups")
+  @@index([userId])
 }
 
 // ============================================================
