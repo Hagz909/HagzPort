@@ -82,16 +82,18 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 relative overflow-x-hidden flex flex-col justify-between font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
       
-      {/* Background Ambient Glowing Orbs */}
-      <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[130px] pointer-events-none animate-pulse" style={{ animationDuration: '8s' }}></div>
-      <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-emerald-500/10 blur-[140px] pointer-events-none animate-pulse" style={{ animationDuration: '10s' }}></div>
-      <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-[120px] pointer-events-none"></div>
+      {/* Background Ambient Glowing Orbs Container (Prevents Scroll Bleeding) */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[130px] animate-pulse" style={{ animationDuration: '8s' }}></div>
+        <div className="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-emerald-500/10 blur-[140px] animate-pulse" style={{ animationDuration: '10s' }}></div>
+        <div className="absolute top-[40%] left-[50%] -translate-x-1/2 w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-[120px]"></div>
+      </div>
 
       {/* Futuristic Grid Overlay */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0"></div>
       
       {/* Fine radial gradient to vignette the grid overlay */}
-      <div className="absolute inset-0 bg-radial-gradient from-transparent via-zinc-950/70 to-zinc-950 pointer-events-none"></div>
+      <div className="absolute inset-0 bg-radial-gradient from-transparent via-zinc-950/70 to-zinc-950 pointer-events-none z-0"></div>
 
       {/* Header / Navbar */}
       <header className="sticky top-0 z-50 w-full border-b border-zinc-900 bg-zinc-950/60 backdrop-blur-xl">

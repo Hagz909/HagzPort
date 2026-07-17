@@ -112,7 +112,7 @@ export async function PATCH(
       // 3. Notifikasi umum untuk Admin (monitoring update pengaturan)
       // Kita abaikan jika perubahannya HANYA kosmetik (theme/font) agar tidak memenuhi database notifikasi admin.
       const isOnlyCosmetic = Object.keys(data).every(key => ['theme', 'font'].includes(key));
-      
+
       if (!isOnlyCosmetic && Object.keys(data).length > 0) {
         const admins = await prisma.user.findMany({ where: { role: 'ADMIN' } });
         if (admins.length > 0) {
