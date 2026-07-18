@@ -88,7 +88,6 @@ export default function OnboardingPage() {
       }
 
       toast.success('Berhasil!');
-      await update(); // refresh session data
       router.push('/dashboard/portfolios');
     } catch (error) {
       toast.error('Terjadi kesalahan sistem');
