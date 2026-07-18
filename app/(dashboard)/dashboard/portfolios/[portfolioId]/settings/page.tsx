@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react';
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { toast } from 'react-hot-toast';
-import { Loader2, Save, AlertTriangle } from 'lucide-react';
+import { Loader2, Save, AlertTriangle, Globe, CheckCircle } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -30,6 +30,11 @@ export default function SettingsPage({ params }: { params: Promise<{ portfolioId
   const [isDeleting, setIsDeleting] = useState(false);
   const [isDefaultInit, setIsDefaultInit] = useState(false);
   const [usernameChangedAt, setUsernameChangedAt] = useState<string | null>(null);
+
+  // Global Publish State
+  const [isGlobalPublished, setIsGlobalPublished] = useState(false);
+  const [isTogglingGlobal, setIsTogglingGlobal] = useState(false);
+  const [completeness, setCompleteness] = useState<{ isComplete: boolean; percentage: number; missing: string[] } | null>(null);
 
   const {
     register,
@@ -94,6 +99,19 @@ export default function SettingsPage({ params }: { params: Promise<{ portfolioId
       }
     };
     fetchGeneral();
+
+    // Fetch Global Publish Status & Completeness
+    const fetchGlobalStatus = async () => {
+      try {
+        const res = await fetch(`/api/dashboard/portfolios/${portfolioId}/global-publish`);
+        if (res.ok) {
+          const data = await res.json();
+          setIsGlobalPublished(data.isGlobalPublished);
+          setCompleteness(data.completeness);
+        }
+      } catch {}
+    };
+    fetchGlobalStatus();
   }, [portfolioId, reset]);
 
   const onSubmit = async (data: SettingsFormValues) => {
@@ -329,6 +347,98 @@ export default function SettingsPage({ params }: { params: Promise<{ portfolioId
                 <p className="text-sm text-zinc-400">Portofolio utama akan ditampilkan ketika pengunjung mengakses halaman profil utama Anda. Hanya 1 portofolio yang dapat menjadi utama.</p>
               </div>
             </div>
+          </div>
+
+          {/* Global Showcase Section */}
+          <div className="border-t border-zinc-800 pt-6 space-y-4">
+            <h3 className="text-sm font-semibold text-zinc-300 flex items-center gap-2">
+              <Globe size={14} className="text-cyan-400" />
+              Global Showcase
+            </h3>
+
+            {completeness && (
+              <div className="bg-zinc-900/50 p-4 rounded-lg border border-zinc-800 space-y-3">
+                {/* Progress Bar */}
+                <div className="flex items-center justify-between text-xs mb-1">
+                  <span className="text-zinc-400">Kelengkapan Data</span>
+                  <span className={`font-bold ${completeness.isComplete ? 'text-emerald-400' : 'text-amber-400'}`}>
+                    {completeness.percentage}%
+                  </span>
+                </div>
+                <div className="w-full h-2 bg-zinc-800 rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${completeness.isComplete ? 'bg-gradient-to-r from-emerald-500 to-cyan-500' : 'bg-gradient-to-r from-amber-500 to-orange-500'}`}
+                    style={{ width: `${completeness.percentage}%` }}
+                  />
+                </div>
+
+                {/* Missing Items */}
+                {completeness.missing.length > 0 && (
+                  <div className="space-y-1 mt-2">
+                    <p className="text-xs text-zinc-500">Yang perlu dilengkapi:</p>
+                    {completeness.missing.map((item, i) => (
+                      <p key={i} className="text-xs text-amber-400/80 flex items-center gap-1.5">
+                        <span className="w-1 h-1 rounded-full bg-amber-500" />
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                )}
+
+                {/* Toggle */}
+                <div className="flex items-center gap-3 pt-2">
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      setIsTogglingGlobal(true);
+                      try {
+                        const res = await fetch(`/api/dashboard/portfolios/${portfolioId}/global-publish`, {
+                          method: 'PATCH',
+                          headers: { 'Content-Type': 'application/json' },
+                          body: JSON.stringify({ isGlobalPublished: !isGlobalPublished }),
+                        });
+                        const data = await res.json();
+                        if (!res.ok) throw new Error(data.message);
+                        setIsGlobalPublished(data.portfolio.isGlobalPublished);
+                        toast.success(data.portfolio.isGlobalPublished ? 'Portfolio dipublikasikan ke Global Showcase!' : 'Portfolio ditarik dari Global Showcase.');
+                        // Refresh completeness
+                        const statusRes = await fetch(`/api/dashboard/portfolios/${portfolioId}/global-publish`);
+                        if (statusRes.ok) {
+                          const statusData = await statusRes.json();
+                          setCompleteness(statusData.completeness);
+                        }
+                      } catch (error: any) {
+                        toast.error(error.message);
+                      } finally {
+                        setIsTogglingGlobal(false);
+                      }
+                    }}
+                    disabled={isTogglingGlobal || (!isGlobalPublished && !completeness.isComplete)}
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed ${
+                      isGlobalPublished ? 'bg-cyan-500' : 'bg-zinc-700'
+                    }`}
+                  >
+                    <span className={`inline-block h-4 w-4 rounded-full bg-white transition-transform duration-200 ${
+                      isGlobalPublished ? 'translate-x-6' : 'translate-x-1'
+                    }`} />
+                  </button>
+                  <div>
+                    <span className="font-medium text-zinc-50 text-sm block">
+                      {isGlobalPublished ? 'Terdaftar di Global Showcase' : 'Publish ke Global Showcase'}
+                    </span>
+                    <span className="text-xs text-zinc-400">
+                      {isGlobalPublished
+                        ? 'Portfolio Anda tampil di halaman Global untuk dilihat semua pengguna.'
+                        : completeness.isComplete
+                        ? 'Klik untuk menampilkan portfolio Anda di halaman Global.'
+                        : 'Lengkapi data terlebih dahulu untuk mengaktifkan fitur ini.'}
+                    </span>
+                  </div>
+                  {isTogglingGlobal && <Loader2 className="w-4 h-4 animate-spin text-cyan-400 ml-auto" />}
+                  {isGlobalPublished && !isTogglingGlobal && <CheckCircle className="w-4 h-4 text-emerald-400 ml-auto" />}
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="pt-4 flex justify-end">

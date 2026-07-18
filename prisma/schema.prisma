@@ -106,6 +106,8 @@ model Portfolio {
   googleAnalyticsId    String?
 
   isPublished          Boolean  @default(false)
+  isGlobalPublished    Boolean  @default(false)   // Publish ke Global Showcase
+  globalPublishedAt    DateTime?                  // Timestamp publish ke global
   usernameChangedAt    DateTime? // Catat perubahan username per portfolio
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt

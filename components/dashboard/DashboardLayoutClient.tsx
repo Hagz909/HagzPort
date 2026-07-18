@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Folder, Users, MessageSquare, LogOut, Bell, Menu, Settings, X, Activity, PieChart, FileText, Archive, Star } from 'lucide-react';
+import { Home, Folder, Users, MessageSquare, LogOut, Bell, Menu, Settings, X, Activity, PieChart, FileText, Archive, Star, Globe, Shield } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function DashboardLayoutClient({
@@ -68,6 +68,7 @@ export default function DashboardLayoutClient({
     <>
       {role === 'USER' ? (
         <>
+          <NavLink href="/dashboard/global" icon={<Globe size={20} />} label="Portfolio Global" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/dashboard" icon={<Home size={20} />} label="Overview" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/dashboard/portfolios" icon={<Folder size={20} />} label="Portofolio Saya" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/dashboard/resume" icon={<FileText size={20} />} label="Studio Resume (CV)" pathname={pathname} onClick={closeMobileMenu} />
@@ -77,6 +78,8 @@ export default function DashboardLayoutClient({
       ) : (
         <>
           <NavLink href="/admin/dashboard" icon={<Home size={20} />} label="Overview" pathname={pathname} onClick={closeMobileMenu} />
+          <NavLink href="/admin/global" icon={<Globe size={20} />} label="Lihat Global" pathname={pathname} onClick={closeMobileMenu} />
+          <NavLink href="/admin/global/manage" icon={<Shield size={20} />} label="Kelola Global" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/admin/users" icon={<Users size={20} />} label="Kelola User" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/admin/cv-logs" icon={<FileText size={20} />} label="Log Generate CV" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/admin/messages" icon={<MessageSquare size={20} />} label="Semua Pesan" pathname={pathname} onClick={closeMobileMenu} />

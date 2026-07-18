@@ -4,17 +4,17 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Poppins } from 'next/font/google';
-import { 
-  Folder, 
-  FileText, 
-  Shield, 
-  ArrowRight, 
-  Sparkles, 
-  Layout, 
-  Cpu, 
-  TrendingUp, 
-  CheckCircle2, 
-  Globe, 
+import {
+  Folder,
+  FileText,
+  Shield,
+  ArrowRight,
+  Sparkles,
+  Layout,
+  Cpu,
+  TrendingUp,
+  CheckCircle2,
+  Globe,
   ArrowUpRight,
   Loader2,
   MousePointer
@@ -81,7 +81,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-50 relative overflow-x-hidden flex flex-col justify-between font-sans selection:bg-cyan-500/30 selection:text-cyan-200">
-      
+
       {/* Background Ambient Glowing Orbs Container (Prevents Scroll Bleeding) */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[130px] animate-pulse" style={{ animationDuration: '8s' }}></div>
@@ -91,7 +91,7 @@ export default function Home() {
 
       {/* Futuristic Grid Overlay */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none z-0"></div>
-      
+
       {/* Fine radial gradient to vignette the grid overlay */}
       <div className="absolute inset-0 bg-radial-gradient from-transparent via-zinc-950/70 to-zinc-950 pointer-events-none z-0"></div>
 
@@ -114,14 +114,14 @@ export default function Home() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link 
-              href="/login" 
+            <Link
+              href="/login"
               className="text-sm font-semibold text-zinc-400 hover:text-white transition-colors px-3 py-1"
             >
               Masuk
             </Link>
-            <Link 
-              href="/register" 
+            <Link
+              href="/register"
               className="relative group px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-sm font-bold transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_25px_rgba(6,182,212,0.6)] active:scale-[0.98] overflow-hidden"
             >
               <span className="relative z-10">Daftar Sekarang</span>
@@ -133,11 +133,11 @@ export default function Home() {
 
       {/* Hero Section */}
       <main className="flex-1 relative z-10 w-full max-w-7xl mx-auto px-6 pt-16 sm:pt-24 pb-20 flex flex-col items-center">
-        
+
         {/* Hero Title & Text */}
         <div className="text-center space-y-6 max-w-4xl mx-auto mb-16">
           {/* Tagline Badge */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.05)]"
@@ -162,14 +162,14 @@ export default function Home() {
 
           {/* Actions */}
           <div className="pt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link 
-              href="/login" 
+            <Link
+              href="/login"
               className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold rounded-xl flex items-center justify-center gap-2.5 transition-all active:scale-[0.98] shadow-[0_0_25px_rgba(6,182,212,0.4)]"
             >
               Mulai Bangun Portofolio <ArrowRight size={18} />
             </Link>
-            <Link 
-              href="/register" 
+            <Link
+              href="/register"
               className="w-full sm:w-auto px-8 py-4 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
             >
               Buat Akun Baru
@@ -179,176 +179,173 @@ export default function Home() {
 
         {/* Floating SaaS Interactive Window Mockup with 3D perspective */}
         <div id="tampilan" className="perspective-1000 w-full max-w-5xl mb-24 relative z-20 scroll-mt-28">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50, rotateX: 12, rotateY: -10 }}
             animate={{ opacity: 1, y: 0, rotateX: 8, rotateY: -6 }}
             whileHover={{ rotateX: 0, rotateY: 0, scale: 1.02 }}
             transition={{ type: "spring", stiffness: 70, damping: 20 }}
             className="w-full rounded-2xl border border-zinc-800/80 bg-zinc-900/40 backdrop-blur-xl p-3 sm:p-4 shadow-[0_30px_100px_rgba(0,0,0,0.8),inset_0_1px_80px_rgba(255,255,255,0.02)] relative group transform-style-preserve-3d"
           >
-          {/* Header Line decoration */}
-          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
-          
-          {/* Browser Window Bar */}
-          <div className="flex justify-between items-center pb-3 border-b border-zinc-800/80 mb-3 px-2">
-            <div className="flex gap-2">
-              <span className="w-3 h-3 rounded-full bg-red-500/80 block"></span>
-              <span className="w-3 h-3 rounded-full bg-yellow-500/80 block"></span>
-              <span className="w-3 h-3 rounded-full bg-green-500/80 block"></span>
-            </div>
-            <div className="bg-zinc-950/80 border border-zinc-800 rounded-lg px-8 py-1 text-[10px] text-zinc-500 w-1/3 text-center truncate">
-              hgzport.com/dashboard/resume
-            </div>
-            <div className="w-12"></div>
-          </div>
+            {/* Header Line decoration */}
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
 
-          {/* Simulated App Workspace Grid */}
-          <div className="grid lg:grid-cols-[200px_1fr_1.2fr] gap-4 rounded-xl overflow-hidden min-h-[380px] bg-zinc-950/80 p-2 text-left relative">
-            
-            {/* Simulated Mouse Pointer */}
-            <AnimatePresence>
-              {animationStep === 3 && (
-                <motion.div 
-                  initial={{ x: '10%', y: '10%' }}
-                  animate={{ x: '35%', y: '82%' }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 1.4, ease: "easeInOut" }}
-                  className="absolute z-40 pointer-events-none text-cyan-400 drop-shadow-[0_0_8px_#06b6d4]"
-                >
-                  <MousePointer className="w-6 h-6 fill-current" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* 1. Simulated Sidebar */}
-            <div className="border-r border-zinc-900 p-3 space-y-4 hidden lg:block">
-              <div className="h-6 w-24 bg-zinc-900 rounded-md mb-6"></div>
-              <div className="space-y-2">
-                <div className="h-8 bg-cyan-500/10 border-l-2 border-cyan-400 rounded-r-md flex items-center px-2">
-                  <div className="h-3 w-16 bg-cyan-400/40 rounded"></div>
-                </div>
-                <div className="h-8 rounded-md flex items-center px-2">
-                  <div className="h-3 w-14 bg-zinc-900 rounded"></div>
-                </div>
-                <div className="h-8 rounded-md flex items-center px-2">
-                  <div className="h-3 w-20 bg-zinc-900 rounded"></div>
-                </div>
+            {/* Browser Window Bar */}
+            <div className="flex justify-between items-center pb-3 border-b border-zinc-800/80 mb-3 px-2">
+              <div className="flex gap-2">
+                <span className="w-3 h-3 rounded-full bg-red-500/80 block"></span>
+                <span className="w-3 h-3 rounded-full bg-yellow-500/80 block"></span>
+                <span className="w-3 h-3 rounded-full bg-green-500/80 block"></span>
               </div>
+              <div className="bg-zinc-950/80 border border-zinc-800 rounded-lg px-8 py-1 text-[10px] text-zinc-500 w-1/3 text-center truncate">
+                hgzport.com/dashboard/resume
+              </div>
+              <div className="w-12"></div>
             </div>
 
-            {/* 2. Simulated Form */}
-            <div className="p-4 space-y-4 flex flex-col justify-between">
-              <div className="space-y-3">
-                <div className="h-5 w-32 bg-zinc-900 rounded-md"></div>
-                
-                {/* Form Input 1: Nama */}
-                <div className="space-y-1">
-                  <div className="h-3 w-20 bg-zinc-800 rounded"></div>
-                  <div className="h-10 bg-zinc-900 border border-zinc-800 rounded-xl px-3 flex items-center text-xs text-zinc-300">
-                    {typedName}
-                    {(animationStep === 1) && (
-                      <span className="w-1 h-3.5 bg-cyan-400 ml-0.5 animate-pulse" />
-                    )}
-                  </div>
-                </div>
+            {/* Simulated App Workspace Grid */}
+            <div className="grid lg:grid-cols-[200px_1fr_1.2fr] gap-4 rounded-xl overflow-hidden min-h-[380px] bg-zinc-950/80 p-2 text-left relative">
 
-                {/* Form Input 2: Tagline */}
-                <div className="space-y-1">
-                  <div className="h-3 w-24 bg-zinc-800 rounded"></div>
-                  <div className="h-10 bg-zinc-900 border border-zinc-800 rounded-xl px-3 flex items-center text-xs text-zinc-300">
-                    {typedTitle}
-                    {(animationStep === 2) && (
-                      <span className="w-1 h-3.5 bg-cyan-400 ml-0.5 animate-pulse" />
-                    )}
-                  </div>
-                </div>
-              </div>
-
-              {/* Generate Button Simulation */}
-              <motion.div 
-                animate={animationStep === 3 ? { scale: [1, 0.96, 1] } : {}}
-                transition={{ duration: 0.3, delay: 1.1 }}
-                className={`h-10 rounded-xl flex items-center justify-center font-bold text-xs text-white transition-all ${
-                  animationStep === 4 
-                    ? 'bg-emerald-600 shadow-[0_0_15px_rgba(16,185,129,0.3)]' 
-                    : 'bg-cyan-600 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                }`}
-              >
-                {animationStep === 4 ? (
-                  <span className="flex items-center gap-1.5"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Menyusun...</span>
-                ) : (
-                  <span>Generate Preview</span>
+              {/* Simulated Mouse Pointer */}
+              <AnimatePresence>
+                {animationStep === 3 && (
+                  <motion.div
+                    initial={{ x: '10%', y: '10%' }}
+                    animate={{ x: '35%', y: '82%' }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 1.4, ease: "easeInOut" }}
+                    className="absolute z-40 pointer-events-none text-cyan-400 drop-shadow-[0_0_8px_#06b6d4]"
+                  >
+                    <MousePointer className="w-6 h-6 fill-current" />
+                  </motion.div>
                 )}
-              </motion.div>
-            </div>
+              </AnimatePresence>
 
-            {/* 3. Simulated Live Mockup with 3D feel */}
-            <div 
-              className={`border rounded-xl p-4 flex flex-col justify-between relative overflow-hidden transition-all duration-700 ${
-                animationStep === 5 
-                  ? 'bg-zinc-900/90 border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.25)]' 
-                  : 'bg-zinc-900/40 border-zinc-800/80 shadow-[inset_0_0_20px_rgba(0,0,0,0.4)]'
-              }`}
-            >
-              {/* Laser Scan line on step 4 */}
-              {animationStep === 4 && (
-                <div className="absolute inset-0 bg-cyan-500/5 z-20 pointer-events-none overflow-hidden">
-                  <div className="w-full h-0.5 bg-cyan-400 shadow-[0_0_15px_#06b6d4] absolute top-0 animate-scanline" />
-                </div>
-              )}
-
-              <div className="absolute top-0 right-0 left-0 h-1 bg-cyan-500/20"></div>
-              
-              <div className="space-y-4">
-                {/* Photo & Header area */}
-                <div className="flex gap-3 items-center">
-                  <div className="w-10 h-10 rounded-full bg-zinc-800 shrink-0 flex items-center justify-center text-xs font-bold text-cyan-400 border border-zinc-700/50">
-                    {animationStep === 5 ? "FA" : "?"}
+              {/* 1. Simulated Sidebar */}
+              <div className="border-r border-zinc-900 p-3 space-y-4 hidden lg:block">
+                <div className="h-6 w-24 bg-zinc-900 rounded-md mb-6"></div>
+                <div className="space-y-2">
+                  <div className="h-8 bg-cyan-500/10 border-l-2 border-cyan-400 rounded-r-md flex items-center px-2">
+                    <div className="h-3 w-16 bg-cyan-400/40 rounded"></div>
                   </div>
-                  <div className="space-y-1 w-full">
-                    {animationStep === 5 ? (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold text-white">Farhan Aditya</motion.div>
-                    ) : (
-                      <div className="h-3 bg-zinc-800 rounded w-1/2"></div>
-                    )}
-                    
-                    {animationStep === 5 ? (
-                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[10px] text-cyan-400 font-semibold">Frontend Engineer</motion.div>
-                    ) : (
-                      <div className="h-2 bg-zinc-900 rounded w-1/3"></div>
-                    )}
+                  <div className="h-8 rounded-md flex items-center px-2">
+                    <div className="h-3 w-14 bg-zinc-900 rounded"></div>
+                  </div>
+                  <div className="h-8 rounded-md flex items-center px-2">
+                    <div className="h-3 w-20 bg-zinc-900 rounded"></div>
                   </div>
                 </div>
+              </div>
 
-                {/* Project details area */}
-                <div className="space-y-2 pt-2 border-t border-zinc-900">
-                  {animationStep === 5 ? (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2">
-                      <div className="text-[10px] font-bold text-zinc-300">PENGALAMAN PROYEK</div>
-                      <div className="text-[9px] text-zinc-400 font-medium">Portofolio Builder & Studio CV (React, NextJS)</div>
-                      <div className="text-[9px] text-zinc-500 leading-relaxed">Membangun platform portfolio dinamis dengan integrasi file PDF.</div>
-                    </motion.div>
+              {/* 2. Simulated Form */}
+              <div className="p-4 space-y-4 flex flex-col justify-between">
+                <div className="space-y-3">
+                  <div className="h-5 w-32 bg-zinc-900 rounded-md"></div>
+
+                  {/* Form Input 1: Nama */}
+                  <div className="space-y-1">
+                    <div className="h-3 w-20 bg-zinc-800 rounded"></div>
+                    <div className="h-10 bg-zinc-900 border border-zinc-800 rounded-xl px-3 flex items-center text-xs text-zinc-300">
+                      {typedName}
+                      {(animationStep === 1) && (
+                        <span className="w-1 h-3.5 bg-cyan-400 ml-0.5 animate-pulse" />
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Form Input 2: Tagline */}
+                  <div className="space-y-1">
+                    <div className="h-3 w-24 bg-zinc-800 rounded"></div>
+                    <div className="h-10 bg-zinc-900 border border-zinc-800 rounded-xl px-3 flex items-center text-xs text-zinc-300">
+                      {typedTitle}
+                      {(animationStep === 2) && (
+                        <span className="w-1 h-3.5 bg-cyan-400 ml-0.5 animate-pulse" />
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Generate Button Simulation */}
+                <motion.div
+                  animate={animationStep === 3 ? { scale: [1, 0.96, 1] } : {}}
+                  transition={{ duration: 0.3, delay: 1.1 }}
+                  className={`h-10 rounded-xl flex items-center justify-center font-bold text-xs text-white transition-all ${animationStep === 4
+                      ? 'bg-emerald-600 shadow-[0_0_15px_rgba(16,185,129,0.3)]'
+                      : 'bg-cyan-600 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                    }`}
+                >
+                  {animationStep === 4 ? (
+                    <span className="flex items-center gap-1.5"><Loader2 className="w-3.5 h-3.5 animate-spin" /> Menyusun...</span>
                   ) : (
-                    <>
-                      <div className="h-2.5 bg-zinc-800 rounded w-full"></div>
-                      <div className="h-2.5 bg-zinc-800 rounded w-full"></div>
-                      <div className="h-2.5 bg-zinc-800 rounded w-5/6"></div>
-                    </>
+                    <span>Generate Preview</span>
                   )}
-                </div>
+                </motion.div>
               </div>
 
-              {/* Status footer inside mockup */}
-              <div className={`h-8 rounded-lg flex items-center justify-center text-xs gap-2 transition-colors ${
-                animationStep === 5 ? 'bg-cyan-500/10 text-cyan-400' : 'bg-zinc-800/50 text-zinc-500'
-              }`}>
-                <FileText size={14} /> 
-                <span>{animationStep === 5 ? "CV ATS-Ready Berhasil Dibuat" : "Draft CV Belum Disusun"}</span>
+              {/* 3. Simulated Live Mockup with 3D feel */}
+              <div
+                className={`border rounded-xl p-4 flex flex-col justify-between relative overflow-hidden transition-all duration-700 ${animationStep === 5
+                    ? 'bg-zinc-900/90 border-cyan-500/40 shadow-[0_0_30px_rgba(6,182,212,0.25)]'
+                    : 'bg-zinc-900/40 border-zinc-800/80 shadow-[inset_0_0_20px_rgba(0,0,0,0.4)]'
+                  }`}
+              >
+                {/* Laser Scan line on step 4 */}
+                {animationStep === 4 && (
+                  <div className="absolute inset-0 bg-cyan-500/5 z-20 pointer-events-none overflow-hidden">
+                    <div className="w-full h-0.5 bg-cyan-400 shadow-[0_0_15px_#06b6d4] absolute top-0 animate-scanline" />
+                  </div>
+                )}
+
+                <div className="absolute top-0 right-0 left-0 h-1 bg-cyan-500/20"></div>
+
+                <div className="space-y-4">
+                  {/* Photo & Header area */}
+                  <div className="flex gap-3 items-center">
+                    <div className="w-10 h-10 rounded-full bg-zinc-800 shrink-0 flex items-center justify-center text-xs font-bold text-cyan-400 border border-zinc-700/50">
+                      {animationStep === 5 ? "FA" : "?"}
+                    </div>
+                    <div className="space-y-1 w-full">
+                      {animationStep === 5 ? (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-bold text-white">Farhan Aditya</motion.div>
+                      ) : (
+                        <div className="h-3 bg-zinc-800 rounded w-1/2"></div>
+                      )}
+
+                      {animationStep === 5 ? (
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-[10px] text-cyan-400 font-semibold">Frontend Engineer</motion.div>
+                      ) : (
+                        <div className="h-2 bg-zinc-900 rounded w-1/3"></div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Project details area */}
+                  <div className="space-y-2 pt-2 border-t border-zinc-900">
+                    {animationStep === 5 ? (
+                      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-2">
+                        <div className="text-[10px] font-bold text-zinc-300">PENGALAMAN PROYEK</div>
+                        <div className="text-[9px] text-zinc-400 font-medium">Portofolio Builder & Studio CV (React, NextJS)</div>
+                        <div className="text-[9px] text-zinc-500 leading-relaxed">Membangun platform portfolio dinamis dengan integrasi file PDF.</div>
+                      </motion.div>
+                    ) : (
+                      <>
+                        <div className="h-2.5 bg-zinc-800 rounded w-full"></div>
+                        <div className="h-2.5 bg-zinc-800 rounded w-full"></div>
+                        <div className="h-2.5 bg-zinc-800 rounded w-5/6"></div>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Status footer inside mockup */}
+                <div className={`h-8 rounded-lg flex items-center justify-center text-xs gap-2 transition-colors ${animationStep === 5 ? 'bg-cyan-500/10 text-cyan-400' : 'bg-zinc-800/50 text-zinc-500'
+                  }`}>
+                  <FileText size={14} />
+                  <span>{animationStep === 5 ? "CV ATS-Ready Berhasil Dibuat" : "Draft CV Belum Disusun"}</span>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
-      </div>
+          </motion.div>
+        </div>
 
         {/* Features Showcase Section */}
         <section id="fitur" className="w-full space-y-12 scroll-mt-28">
@@ -407,7 +404,7 @@ export default function Home() {
             <p className="text-zinc-400 text-base leading-relaxed font-light">
               Membangun kehadiran profesional digital tidak pernah semudah ini. Kami menyediakan infrastruktur yang kokoh untuk membantu karir Anda melejit.
             </p>
-            
+
             <div className="space-y-3.5">
               <div className="flex gap-3 items-center">
                 <CheckCircle2 className="text-cyan-400 shrink-0" size={20} />
@@ -448,7 +445,7 @@ export default function Home() {
         <section className="w-full max-w-5xl rounded-2xl bg-gradient-to-r from-zinc-900 via-zinc-950 to-zinc-900 border border-zinc-800/80 p-8 sm:p-12 relative overflow-hidden shadow-2xl flex flex-col md:flex-row justify-between items-center gap-8 text-left group">
           <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
           <div className="absolute -top-12 -left-12 w-48 h-48 rounded-full bg-cyan-500/10 blur-[60px]" />
-          
+
           <div className="space-y-3 relative z-10">
             <h3 className="text-2xl sm:text-3xl font-black text-white">Siap Memulai Sihir Anda?</h3>
             <p className="text-zinc-400 text-sm sm:text-base max-w-xl font-light">
@@ -456,8 +453,8 @@ export default function Home() {
             </p>
           </div>
 
-          <Link 
-            href="/register" 
+          <Link
+            href="/register"
             className="w-full md:w-auto px-8 py-4 bg-white hover:bg-zinc-200 text-zinc-950 font-bold rounded-xl transition-all shadow-[0_0_30px_rgba(255,255,255,0.15)] flex items-center justify-center gap-2 group shrink-0"
           >
             Daftar Gratis <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
