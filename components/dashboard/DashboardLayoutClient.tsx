@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Folder, Users, MessageSquare, LogOut, Bell, Menu, Settings, X, Activity, PieChart, FileText, Archive, Star, Globe, Shield } from 'lucide-react';
+import { Home, Folder, Users, MessageSquare, LogOut, Bell, Menu, Settings, X, Activity, PieChart, FileText, Archive, Star, Globe, Shield, Briefcase, Trophy } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function DashboardLayoutClient({
@@ -72,6 +72,10 @@ export default function DashboardLayoutClient({
           <NavLink href="/dashboard" icon={<Home size={20} />} label="Overview" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/dashboard/portfolios" icon={<Folder size={20} />} label="Portofolio Saya" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/dashboard/resume" icon={<FileText size={20} />} label="Studio Resume (CV)" pathname={pathname} onClick={closeMobileMenu} />
+          <NavLink href="/dashboard/cv-terbuat" icon={<Archive size={20} />} label="CV Terbuat" pathname={pathname} onClick={closeMobileMenu} />
+          <NavLink href="/dashboard/analytics" icon={<PieChart size={20} />} label="Analitik & Statistik" pathname={pathname} onClick={closeMobileMenu} />
+          <NavLink href="/dashboard/jobs" icon={<Briefcase size={20} />} label="Pencarian Karier" pathname={pathname} onClick={closeMobileMenu} />
+          <NavLink href="/dashboard/achievements" icon={<Trophy size={20} />} label="Pencapaian (Badge)" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/dashboard/messages" icon={<MessageSquare size={20} />} label="Pesan & Notifikasi" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/dashboard/settings" icon={<Settings size={20} />} label="Pengaturan Akun" pathname={pathname} onClick={closeMobileMenu} />
         </>

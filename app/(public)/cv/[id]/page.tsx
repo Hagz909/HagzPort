@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
-import { Printer } from 'lucide-react';
+import { Printer, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 
 interface Props {
@@ -34,11 +34,18 @@ export default async function ResumePrintPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-zinc-200 py-8 print:py-0 print:bg-white flex flex-col items-center font-sans">
       
-      {/* Tombol Print (Sembunyi saat dicetak) */}
-      <div className="mb-6 print:hidden">
+      {/* Top Actions (Sembunyi saat dicetak) */}
+      <div className="mb-6 print:hidden flex items-center justify-center gap-4">
+        <button 
+          id="back-btn"
+          className="px-6 py-3 bg-zinc-800 text-white rounded-lg shadow-lg flex items-center gap-2 hover:bg-zinc-700 transition-colors font-semibold"
+        >
+          <ArrowLeft size={20} />
+          Kembali
+        </button>
         <button 
           id="print-cv-btn"
-          className="px-6 py-3 bg-zinc-900 text-white rounded-lg shadow-lg flex items-center gap-2 hover:bg-zinc-800 transition-colors font-semibold"
+          className="px-6 py-3 bg-cyan-600 text-white rounded-lg shadow-lg flex items-center gap-2 hover:bg-cyan-500 transition-colors font-semibold"
         >
           <Printer size={20} />
           Cetak ke PDF
@@ -47,6 +54,13 @@ export default async function ResumePrintPage({ params }: Props) {
           dangerouslySetInnerHTML={{
             __html: `
               document.getElementById('print-cv-btn').addEventListener('click', () => { window.print(); });
+              document.getElementById('back-btn').addEventListener('click', () => { 
+                if (window.history.length > 1) {
+                  window.history.back();
+                } else {
+                  window.close();
+                }
+              });
             `,
           }}
         />

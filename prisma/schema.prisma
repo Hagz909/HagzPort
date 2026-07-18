@@ -104,6 +104,7 @@ model Portfolio {
   metaDescription      String?
   metaKeywords         String?
   googleAnalyticsId    String?
+  views                Int      @default(0) // Total public profile views
 
   isPublished          Boolean  @default(false)
   isGlobalPublished    Boolean  @default(false)   // Publish ke Global Showcase

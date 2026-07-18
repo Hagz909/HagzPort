@@ -14,6 +14,7 @@ import { ExperienceSection } from '@/components/public/ExperienceSection';
 import { SkillsSection } from '@/components/public/SkillsSection';
 import { ThemeInjector } from '@/components/public/ThemeInjector';
 import { TestimonialsSection } from '@/components/public/TestimonialsSection';
+import { ViewTracker } from '@/components/public/ViewTracker';
 
 export const revalidate = 60;
 
@@ -106,6 +107,7 @@ export default async function PublicPortfolioPage({ params }: PublicPortfolioPag
           </Script>
         </>
       )}
+      <ViewTracker portfolioId={portfolio.id} />
       <ThemeInjector theme={portfolio.theme} font={portfolio.font} />
       <Navbar ownerName={ownerName} />
       

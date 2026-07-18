@@ -6,17 +6,12 @@ import { FileText, Loader2, Wand2, Download, ExternalLink } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FeedbackModal } from '@/components/dashboard/FeedbackModal';
 
 export default function ResumeBuilderPage() {
   const [portfolios, setPortfolios] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isGenerating, setIsGenerating] = useState(false);
   const [selectedPortfolio, setSelectedPortfolio] = useState('');
-  const [generatedCv, setGeneratedCv] = useState<any>(null);
-  
-  // Feedback Modal State
-  const [showFeedback, setShowFeedback] = useState(false);
   
   const router = useRouter();
 
@@ -56,22 +51,8 @@ export default function ResumeBuilderPage() {
         throw new Error(errData.message || 'Gagal generate CV');
       }
 
-      const data = await res.json();
-      setGeneratedCv(data.cv);
       toast.success('CV Berhasil Dibuat! Notifikasi telah dikirim ke Admin.');
-      
-      // Check if we should show the feedback pop-up
-      try {
-        const statusRes = await fetch('/api/dashboard/feedback/status');
-        if (statusRes.ok) {
-          const { shouldShow } = await statusRes.json();
-          if (shouldShow) {
-            setTimeout(() => setShowFeedback(true), 1500); // Tunda sedikit agar efek sukses selesai
-          }
-        }
-      } catch (err) {
-        // Ignore errors checking feedback status
-      }
+      router.push('/dashboard/cv-terbuat?success=1');
       
     } catch (error: any) {
       toast.error(error.message);
@@ -149,30 +130,6 @@ export default function ResumeBuilderPage() {
             </button>
           </form>
 
-          {/* Unduh Section jika sudah berhasil generate */}
-          <AnimatePresence>
-            {generatedCv && (
-              <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                className="mt-6 p-4 bg-zinc-900 border border-zinc-800 rounded-xl space-y-4 shadow-xl"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                  <p className="text-sm font-medium text-emerald-400">CV Siap Diunduh / Dicetak!</p>
-                </div>
-                <a
-                  href={generatedCv.publicUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.98] shadow-[0_0_15px_rgba(16,185,129,0.3)]"
-                >
-                  <Download className="w-5 h-5" /> Unduh & Cetak PDF Sekarang
-                </a>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.div>
 
         {/* Right side: 3D Live Preview */}
@@ -241,46 +198,9 @@ export default function ResumeBuilderPage() {
               </div>
             </div>
 
-            {/* Overlay if generated */}
-            <AnimatePresence>
-              {generatedCv && (
-                <motion.div 
-                  initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-                  animate={{ opacity: 1, backdropFilter: 'blur(8px)' }}
-                  className="absolute inset-0 bg-zinc-950/80 flex flex-col items-center justify-center p-6 text-center z-10"
-                >
-                  <motion.div 
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ type: "spring", bounce: 0.5 }}
-                    className="w-16 h-16 bg-cyan-500/20 rounded-full flex items-center justify-center mb-4 shadow-[0_0_30px_rgba(6,182,212,0.5)]"
-                  >
-                    <FileText className="w-8 h-8 text-cyan-400" />
-                  </motion.div>
-                  <h3 className="text-white font-bold text-lg mb-1">Berhasil Disusun!</h3>
-                  <p className="text-zinc-400 text-xs mb-6 px-4">Draft CV A4 telah siap. Klik di bawah untuk melihat & mencetak PDF resolusi tinggi.</p>
-                  <a 
-                    href={generatedCv.publicUrl} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="w-full py-3 bg-cyan-500 hover:bg-cyan-400 text-zinc-950 font-bold rounded-xl flex justify-center items-center gap-2 transition-all hover:scale-105 shadow-[0_0_20px_rgba(6,182,212,0.4)]"
-                  >
-                    Buka PDF <ExternalLink size={16} />
-                  </a>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
           </motion.div>
         </div>
       </div>
-
-      {/* Pop Up Feedback */}
-      <FeedbackModal 
-        isOpen={showFeedback} 
-        onClose={() => setShowFeedback(false)} 
-        onSuccess={() => setShowFeedback(false)} 
-      />
     </div>
   );
 }
