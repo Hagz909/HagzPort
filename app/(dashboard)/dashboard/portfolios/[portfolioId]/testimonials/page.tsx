@@ -3,10 +3,11 @@
 import { useState, useEffect, use } from 'react';
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { toast } from 'react-hot-toast';
-import { Loader2, Plus, Pencil, Trash2, X, Quote } from 'lucide-react';
+import { Loader2, Plus, Pencil, Trash2, X, Quote, ArrowRight } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 interface Testimonial {
   id: string;
@@ -224,6 +225,16 @@ export default function TestimonialsPage({ params }: { params: Promise<{ portfol
           ))}
         </div>
       )}
+
+      {/* Wizard Next Step Button */}
+      <div className="pt-8 flex justify-end">
+        <Link 
+          href={`/dashboard/portfolios/${portfolioId}/appearance`}
+          className="btn btn-primary"
+        >
+          Lanjutkan ke Tampilan (Tema) <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
+      </div>
 
       {/* Testimonial Form Modal */}
       {isModalOpen && (

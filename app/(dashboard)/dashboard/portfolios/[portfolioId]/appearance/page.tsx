@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react';
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { toast } from 'react-hot-toast';
-import { Loader2, Save, Palette, Type } from 'lucide-react';
+import { Loader2, Save, Palette, Type, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 const THEMES = [
@@ -68,8 +68,8 @@ export default function AppearancePage({ params }: { params: Promise<{ portfolio
         throw new Error(err.message || 'Gagal menyimpan tampilan');
       }
       
-      toast.success('Pengaturan tampilan berhasil disimpan');
-      router.refresh();
+      toast.success('Tema & Tampilan berhasil disimpan');
+      router.push(`/dashboard/portfolios/${portfolioId}/preview`);
     } catch (error: any) {
       toast.error(error.message);
     } finally {
@@ -159,7 +159,7 @@ export default function AppearancePage({ params }: { params: Promise<{ portfolio
             </div>
           </div>
 
-          <div className="pt-6 flex justify-end">
+          <div className="pt-8 flex justify-end">
             <button
               onClick={onSave}
               disabled={isSaving}
@@ -170,7 +170,8 @@ export default function AppearancePage({ params }: { params: Promise<{ portfolio
               ) : (
                 <Save className="mr-2 h-4 w-4" />
               )}
-              {isSaving ? 'Menyimpan...' : 'Simpan Tampilan'}
+              {isSaving ? 'Menyimpan...' : 'Simpan & Lihat Preview'}
+              {!isSaving && <ArrowRight className="ml-2 h-4 w-4" />}
             </button>
           </div>
 

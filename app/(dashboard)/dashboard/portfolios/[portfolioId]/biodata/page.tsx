@@ -4,10 +4,11 @@ import { useState, useEffect, use } from 'react';
 
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { toast } from 'react-hot-toast';
-import { Loader2, Save } from 'lucide-react';
+import { Loader2, Save, ArrowRight } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm as useReactHookForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 const biodataSchema = z.object({
   fullName: z.string().min(1, 'Nama lengkap wajib diisi').max(100),
@@ -20,6 +21,7 @@ type BiodataFormValues = z.infer<typeof biodataSchema>;
 
 export default function BiodataPage({ params }: { params: Promise<{ portfolioId: string }> }) {
   const { portfolioId } = use(params);
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -73,6 +75,7 @@ export default function BiodataPage({ params }: { params: Promise<{ portfolioId:
       
       toast.success('Biodata berhasil disimpan');
       reset(data); // Reset isDirty state
+      router.push(`/dashboard/portfolios/${portfolioId}/about`);
     } catch (error) {
       toast.error('Terjadi kesalahan saat menyimpan');
     } finally {
@@ -165,7 +168,7 @@ export default function BiodataPage({ params }: { params: Promise<{ portfolioId:
           <div className="pt-4 flex justify-end">
             <button
               type="submit"
-              disabled={isSaving || !isDirty}
+              disabled={isSaving}
               className="btn btn-primary"
             >
               {isSaving ? (
@@ -173,7 +176,8 @@ export default function BiodataPage({ params }: { params: Promise<{ portfolioId:
               ) : (
                 <Save className="mr-2 h-4 w-4" />
               )}
-              {isSaving ? 'Menyimpan...' : 'Simpan Perubahan'}
+              {isSaving ? 'Menyimpan...' : 'Simpan & Lanjutkan'}
+              {!isSaving && <ArrowRight className="ml-2 h-4 w-4" />}
             </button>
           </div>
         </form>

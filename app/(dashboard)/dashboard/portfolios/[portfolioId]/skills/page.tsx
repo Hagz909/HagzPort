@@ -3,7 +3,7 @@
 import { useState, useEffect, use } from 'react';
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { toast } from 'react-hot-toast';
-import { Loader2, Save, X, Plus, Code } from 'lucide-react';
+import { Loader2, Save, X, Plus, Code, ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
 export default function SkillsPage({ params }: { params: Promise<{ portfolioId: string }> }) {
@@ -74,7 +74,7 @@ export default function SkillsPage({ params }: { params: Promise<{ portfolioId: 
       }
       
       toast.success('Keahlian berhasil disimpan');
-      router.refresh();
+      router.push(`/dashboard/portfolios/${portfolioId}/projects`);
     } catch (error: any) {
       toast.error(error.message);
     } finally {
@@ -156,7 +156,7 @@ export default function SkillsPage({ params }: { params: Promise<{ portfolioId: 
             )}
           </div>
 
-          <div className="pt-4 flex justify-end">
+          <div className="pt-8 flex justify-end">
             <button
               onClick={onSave}
               disabled={isSaving}
@@ -167,7 +167,8 @@ export default function SkillsPage({ params }: { params: Promise<{ portfolioId: 
               ) : (
                 <Save className="mr-2 h-4 w-4" />
               )}
-              {isSaving ? 'Menyimpan...' : 'Simpan Keahlian'}
+              {isSaving ? 'Menyimpan...' : 'Simpan & Lanjutkan'}
+              {!isSaving && <ArrowRight className="ml-2 h-4 w-4" />}
             </button>
           </div>
 

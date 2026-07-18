@@ -3,10 +3,11 @@
 import { useState, useEffect, use } from 'react';
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { toast } from 'react-hot-toast';
-import { Loader2, Plus, Pencil, Trash2, X, Briefcase } from 'lucide-react';
+import { Loader2, Plus, Pencil, Trash2, X, Briefcase, ArrowRight } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import Link from 'next/link';
 
 interface Experience {
   id: string;
@@ -229,6 +230,16 @@ export default function ExperiencePage({ params }: { params: Promise<{ portfolio
           ))}
         </div>
       )}
+
+      {/* Wizard Next Step Button */}
+      <div className="pt-8 flex justify-end">
+        <Link 
+          href={`/dashboard/portfolios/${portfolioId}/education`}
+          className="btn btn-primary"
+        >
+          Lanjutkan ke Pendidikan <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
+      </div>
 
       {/* Modal Form */}
       {isModalOpen && (

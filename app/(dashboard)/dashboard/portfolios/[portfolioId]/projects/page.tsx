@@ -6,10 +6,11 @@ import { ImageUploader } from '@/components/ui/ImageUploader';
 import { TechStackInput } from '@/components/ui/TechStackInput';
 import { toast } from 'react-hot-toast';
 import { EmptyState } from '@/components/ui/EmptyState';
-import { Loader2, Plus, Pencil, Trash2, X, Code, Star, GripVertical } from 'lucide-react';
+import { Loader2, Plus, Pencil, Trash2, X, Code, Star, GripVertical, ArrowRight } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, Controller } from 'react-hook-form';
+import Link from 'next/link';
 import Image from 'next/image';
 
 import {
@@ -411,6 +412,16 @@ export default function ProjectsPage({ params }: { params: Promise<{ portfolioId
           </SortableContext>
         </DndContext>
       )}
+
+      {/* Wizard Next Step Button */}
+      <div className="pt-8 flex justify-end">
+        <Link 
+          href={`/dashboard/portfolios/${portfolioId}/testimonials`}
+          className="btn btn-primary"
+        >
+          Lanjutkan ke Testimonial <ArrowRight className="ml-2 h-4 w-4" />
+        </Link>
+      </div>
 
       {/* Modal Form */}
       {isModalOpen && (

@@ -4,10 +4,11 @@ import { useState, useEffect, use } from 'react';
 import { PageHeader } from '@/components/dashboard/PageHeader';
 import { ImageUploader } from '@/components/ui/ImageUploader';
 import { toast } from 'react-hot-toast';
-import { Loader2, Save } from 'lucide-react';
+import { Loader2, Save, ArrowRight } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 const heroSchema = z.object({
   tagline: z.string().max(100).optional().or(z.literal('')),
@@ -20,6 +21,7 @@ type HeroFormValues = z.infer<typeof heroSchema>;
 
 export default function HeroPage({ params }: { params: Promise<{ portfolioId: string }> }) {
   const { portfolioId } = use(params);
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -80,6 +82,7 @@ export default function HeroPage({ params }: { params: Promise<{ portfolioId: st
       
       toast.success('Profil utama berhasil disimpan');
       reset(data); // Reset isDirty state
+      router.push(`/dashboard/portfolios/${portfolioId}/biodata`);
     } catch (error) {
       toast.error('Terjadi kesalahan saat menyimpan');
     } finally {
@@ -186,7 +189,7 @@ export default function HeroPage({ params }: { params: Promise<{ portfolioId: st
             <div className="pt-4 flex justify-end">
               <button
                 type="submit"
-                disabled={isSaving || !isDirty}
+                disabled={isSaving}
                 className="btn btn-primary"
               >
                 {isSaving ? (
@@ -194,7 +197,8 @@ export default function HeroPage({ params }: { params: Promise<{ portfolioId: st
                 ) : (
                   <Save className="mr-2 h-4 w-4" />
                 )}
-                {isSaving ? 'Menyimpan...' : 'Simpan Perubahan'}
+                {isSaving ? 'Menyimpan...' : 'Simpan & Lanjutkan'}
+                {!isSaving && <ArrowRight className="ml-2 h-4 w-4" />}
               </button>
             </div>
           </div>

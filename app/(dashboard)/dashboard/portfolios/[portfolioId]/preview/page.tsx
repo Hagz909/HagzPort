@@ -14,6 +14,7 @@ import { ExperienceSection } from '@/components/public/ExperienceSection';
 import { SkillsSection } from '@/components/public/SkillsSection';
 import { ThemeInjector } from '@/components/public/ThemeInjector';
 import PublicLayoutClient from '@/components/public/PublicLayoutClient';
+import { PreviewWizardCTA } from '@/components/dashboard/PreviewWizardCTA';
 
 export default async function PortfolioPreviewPage({
   params
@@ -66,6 +67,8 @@ export default async function PortfolioPreviewPage({
           Lihat URL Asli <ExternalLink size={14} className="ml-2" />
         </Link>
       </div>
+
+      <PreviewWizardCTA portfolioId={portfolio.id} isPublished={portfolio.isPublished} />
 
       <div className="bg-zinc-950 rounded-2xl border border-zinc-800 overflow-hidden shadow-2xl relative">
         {/* Fake Browser Chrome */}
