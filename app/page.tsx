@@ -3,10 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { motion, useScroll, useTransform, useMotionValue, useSpring, AnimatePresence } from 'framer-motion';
-import {
-  FileText, Shield, ArrowRight, Layout, Cpu,
-  CheckCircle2, ArrowUpRight, MousePointer, Sparkles, Zap, Globe, Radar
-} from 'lucide-react';
+import { CheckCircle2, ArrowRight, Layout, Cpu, Zap, Globe, Radar } from 'lucide-react';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);

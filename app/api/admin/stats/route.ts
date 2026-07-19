@@ -89,7 +89,7 @@ export async function GET(req: Request) {
     });
 
     const graphDataMap = new Map<string, number>();
-    let curr = new Date(since);
+    const curr = new Date(since);
     while (curr <= now) {
       const dateStr = curr.toLocaleDateString('id-ID', { month: 'short', day: 'numeric' });
       graphDataMap.set(dateStr, 0);

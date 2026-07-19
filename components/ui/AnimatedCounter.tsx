@@ -13,7 +13,7 @@ export function AnimatedCounter({ value, duration = 1.5 }: { value: number, dura
   const displayValue = useTransform(springValue, (current) => Math.round(current));
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setMounted(true);
   }, []);
 
