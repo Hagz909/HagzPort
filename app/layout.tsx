@@ -27,9 +27,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} scroll-smooth antialiased font-sans`}
+      className={`${inter.variable} ${jetbrainsMono.variable} antialiased font-sans`}
     >
-      <body className="min-h-screen flex flex-col overflow-x-hidden bg-[#020617] text-zinc-50">
+      <body className="bg-[#020617] text-zinc-50">
         <SmoothScroll>
           <Providers>{children}</Providers>
         </SmoothScroll>

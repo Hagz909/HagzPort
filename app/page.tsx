@@ -76,6 +76,7 @@ export default function Home() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       className="min-h-screen bg-[#020617] text-zinc-50 relative overflow-x-hidden flex flex-col justify-between font-sans selection:bg-[#00f0ff]/30 selection:text-[#00f0ff]"
+      style={{ zoom: '90%' }}
     >
       {/* 1. Interactive Spotlight tied to cursor (Hidden on mobile) */}
       {isMounted && (
@@ -98,6 +99,29 @@ export default function Home() {
       </div>
 
       <div className="fixed inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none z-0 mix-blend-screen mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)"></div>
+
+      {/* Cyber Mega Mendung - Edge Aligned */}
+      <div className="absolute inset-x-0 top-0 pointer-events-none z-0">
+        {/* Cyber Mega Mendung Left */}
+        <motion.div 
+          style={{ x: useTransform(smoothX, x => x * -2), y: useTransform(smoothY, y => y * -2) }}
+          className="absolute -left-[5%] md:-left-[2%] top-36 w-80 sm:w-[600px] opacity-80 hidden lg:block pointer-events-none"
+        >
+          <div className="w-full h-full relative" style={{ WebkitMaskImage: 'linear-gradient(to right, black 30%, transparent 90%)', maskImage: 'linear-gradient(to right, black 30%, transparent 90%)' }}>
+             <img src="/cyber_mega_mendung.png" alt="Mega Mendung Batik" className="w-full h-full object-contain transform -scale-x-100 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]" />
+          </div>
+        </motion.div>
+
+        {/* Cyber Mega Mendung Right */}
+        <motion.div 
+          style={{ x: useTransform(smoothX, x => x * 2), y: useTransform(smoothY, y => y * 2) }}
+          className="absolute -right-[5%] md:-right-[2%] top-64 w-80 sm:w-[600px] opacity-80 hidden lg:block pointer-events-none"
+        >
+          <div className="w-full h-full relative" style={{ WebkitMaskImage: 'linear-gradient(to left, black 30%, transparent 90%)', maskImage: 'linear-gradient(to left, black 30%, transparent 90%)' }}>
+             <img src="/cyber_mega_mendung.png" alt="Mega Mendung Batik" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(176,38,255,0.4)]" />
+          </div>
+        </motion.div>
+      </div>
 
       {/* Header */}
       <header className="fixed top-0 z-50 w-full border-b border-white/5 bg-[#020617]/50 backdrop-blur-2xl">
@@ -132,26 +156,6 @@ export default function Home() {
         className="flex-1 relative z-10 w-full max-w-7xl mx-auto px-6 pt-36 pb-20 flex flex-col items-center min-h-screen"
       >
         <div className="text-center space-y-6 max-w-4xl mx-auto mb-20 relative w-full">
-
-          {/* Cyber Mega Mendung Left */}
-          <motion.div 
-            style={{ x: useTransform(smoothX, x => x * -2), y: useTransform(smoothY, y => y * -2) }}
-            className="absolute -left-20 sm:-left-64 top-0 w-80 sm:w-[500px] opacity-80 hidden lg:block z-0 pointer-events-none"
-          >
-            <div className="w-full h-full relative" style={{ WebkitMaskImage: 'linear-gradient(to right, black 30%, transparent 90%)', maskImage: 'linear-gradient(to right, black 30%, transparent 90%)' }}>
-               <img src="/cyber_mega_mendung.png" alt="Mega Mendung Batik" className="w-full h-full object-contain transform -scale-x-100 drop-shadow-[0_0_15px_rgba(0,240,255,0.4)]" />
-            </div>
-          </motion.div>
-
-          {/* Cyber Mega Mendung Right */}
-          <motion.div 
-            style={{ x: useTransform(smoothX, x => x * 2), y: useTransform(smoothY, y => y * 2) }}
-            className="absolute -right-20 sm:-right-64 top-20 w-80 sm:w-[500px] opacity-80 hidden lg:block z-0 pointer-events-none"
-          >
-            <div className="w-full h-full relative" style={{ WebkitMaskImage: 'linear-gradient(to left, black 30%, transparent 90%)', maskImage: 'linear-gradient(to left, black 30%, transparent 90%)' }}>
-               <img src="/cyber_mega_mendung.png" alt="Mega Mendung Batik" className="w-full h-full object-contain drop-shadow-[0_0_15px_rgba(176,38,255,0.4)]" />
-            </div>
-          </motion.div>
 
           {/* HagzPort Version 2.0 Badge */}
           <motion.div
