@@ -8,7 +8,22 @@
   --color-glass-border: rgba(255, 255, 255, 0.08);
 }
 
+@keyframes ring {
+  0% { transform: rotate(0deg); }
+  10% { transform: rotate(15deg); }
+  20% { transform: rotate(-10deg); }
+  30% { transform: rotate(5deg); }
+  40% { transform: rotate(-5deg); }
+  50% { transform: rotate(0deg); }
+  100% { transform: rotate(0deg); }
+}
+
 @layer utilities {
+  .animate-ring {
+    animation: ring 1.5s ease-in-out infinite;
+    transform-origin: top center;
+  }
+
   .glass-panel {
     background-color: var(--color-glass-bg);
     backdrop-filter: blur(12px);

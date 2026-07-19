@@ -235,11 +235,14 @@ export default function DashboardLayoutClient({
           <div className="flex items-center gap-4 relative">
             <button 
               onClick={() => setIsNotificationOpen(!isNotificationOpen)}
-              className="text-zinc-400 hover:text-zinc-100 relative p-1.5 rounded-md hover:bg-zinc-800 transition-colors"
+              className="group text-zinc-400 hover:text-cyan-400 relative p-2.5 rounded-xl bg-zinc-900/50 backdrop-blur-md border border-white/5 hover:border-cyan-500/30 hover:bg-cyan-500/10 hover:shadow-[0_0_15px_rgba(6,182,212,0.2)] transition-all duration-300"
             >
-              <Bell size={20} />
+              <Bell size={20} className={unreadCount > 0 ? "group-hover:animate-ring" : ""} />
               {unreadCount > 0 && (
-                <span className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-zinc-950"></span>
+                <>
+                  <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full border-2 border-zinc-900 shadow-[0_0_8px_rgba(239,68,68,0.8)] z-10"></span>
+                  <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping opacity-75"></span>
+                </>
               )}
             </button>
 
