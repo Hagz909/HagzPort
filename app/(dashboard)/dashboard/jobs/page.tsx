@@ -194,14 +194,14 @@ export default async function JobMatcherPage() {
             if (!isUsingRealApi && job.matchPercentage < 20) return null;
 
             return (
-              <div key={job.id} className="card p-6 flex flex-col group relative overflow-hidden bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-all">
+              <div key={job.id} className="glass-panel glass-panel-hover p-6 flex flex-col group relative overflow-hidden rounded-2xl">
                 {job.matchPercentage >= 50 && (
-                  <div className={`absolute top-0 right-0 text-xs font-bold px-3 py-1 rounded-bl-lg flex items-center gap-1 border-b border-l ${job.matchPercentage >= 75 ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
+                  <div className={`absolute top-0 right-0 text-xs font-bold px-3 py-1.5 rounded-bl-xl flex items-center gap-1.5 border-b border-l backdrop-blur-md ${job.matchPercentage >= 75 ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20' : 'bg-amber-500/10 text-amber-400 border-amber-500/20'}`}>
                     <CheckCircle2 size={12} /> {job.matchPercentage >= 75 ? 'Sangat Cocok' : 'Cukup Relevan'}
                   </div>
                 )}
                 
-                <h3 className="text-xl font-bold text-white mb-1 mt-2 line-clamp-2">{job.title}</h3>
+                <h3 className="text-xl font-bold text-white mb-1 mt-3 line-clamp-2">{job.title}</h3>
                 <p className="text-cyan-400 font-medium text-sm flex items-center gap-2 mb-4 truncate">
                   <Building2 size={16} className="shrink-0" /> {job.company}
                 </p>
@@ -247,7 +247,7 @@ export default async function JobMatcherPage() {
                       href={job.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-zinc-800 hover:bg-zinc-700 text-white font-medium rounded-lg transition-colors border border-zinc-700 text-sm"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 bg-white/5 hover:bg-white/10 text-cyan-400 hover:text-cyan-300 font-medium rounded-xl transition-colors border border-white/10 text-sm group-hover:border-cyan-500/30"
                     >
                       Lihat Loker Asli <ExternalLink size={14} />
                     </a>

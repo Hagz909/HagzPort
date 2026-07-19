@@ -66,7 +66,7 @@ export default function AdminCVLogsPage() {
           <Loader2 className="w-8 h-8 animate-spin text-cyan-500" />
         </div>
       ) : logs.length === 0 ? (
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-12 text-center shadow-2xl">
+        <div className="glass-panel rounded-xl p-12 text-center shadow-2xl">
           <FileText className="w-12 h-12 text-zinc-700 mx-auto mb-4" />
           <h3 className="text-zinc-400 font-medium">Belum ada log pembuatan CV.</h3>
         </div>
@@ -81,8 +81,8 @@ export default function AdminCVLogsPage() {
                 onClick={() => setSelectedLog(log)}
                 className={`p-4 rounded-xl cursor-pointer transition-all border ${
                   selectedLog?.id === log.id 
-                    ? 'bg-cyan-950/30 border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.15)]' 
-                    : 'bg-zinc-900 border-zinc-800 hover:border-zinc-700 hover:bg-zinc-800/50'
+                    ? 'glass-panel border-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.15)]' 
+                    : 'glass-panel glass-panel-hover opacity-70 hover:opacity-100'
                 }`}
               >
                 <div className="flex justify-between items-start mb-2">

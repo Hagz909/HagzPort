@@ -142,7 +142,7 @@ export default function ActivitiesPage() {
       </div>
 
       {/* Filter Options */}
-      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-4 shadow-lg flex items-center gap-4">
+      <div className="glass-panel rounded-2xl p-4 shadow-lg flex items-center gap-4">
         <Filter className="w-5 h-5 text-zinc-500 ml-2 shrink-0" />
         <div className="flex gap-2 overflow-x-auto pb-1 sm:pb-0 w-full" style={{ scrollbarWidth: 'none' }}>
           {[
@@ -167,7 +167,7 @@ export default function ActivitiesPage() {
       </div>
 
       {/* Timeline Feed */}
-      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+      <div className="glass-panel rounded-2xl p-6 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-1/4 w-96 h-96 bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none" />
         
         <div className="relative z-10 pl-2 md:pl-6">
@@ -190,7 +190,7 @@ export default function ActivitiesPage() {
                     </div>
                     
                     {/* Card */}
-                    <div className="flex-1 p-4 rounded-xl bg-zinc-950/60 border border-zinc-800/50 backdrop-blur-sm shadow-sm group-hover:border-zinc-700/80 group-hover:shadow-[0_0_15px_rgba(0,0,0,0.5)] transition-all">
+                    <div className="flex-1 p-4 rounded-xl glass-panel glass-panel-hover transition-all">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                         <div className="flex items-center gap-2">
                           <span className="font-bold text-zinc-100">{activity.user}</span>

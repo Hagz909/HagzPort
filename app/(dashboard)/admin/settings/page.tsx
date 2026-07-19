@@ -114,7 +114,7 @@ export default function AdminSettingsPage() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Card: Informasi Profil */}
-          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl shadow-xl overflow-hidden relative group">
+          <div className="glass-panel rounded-2xl shadow-xl overflow-hidden relative group">
             <div className="absolute top-0 left-0 w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full pointer-events-none" />
             
             <div className="p-6 border-b border-zinc-800/50 flex items-center gap-3 relative z-10">
@@ -147,7 +147,7 @@ export default function AdminSettingsPage() {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder="Masukkan nama lengkap"
-                      className="w-full bg-zinc-950/60 backdrop-blur-sm border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500/70 focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
+                      className="w-full glass-panel rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500/70 focus:shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all"
                     />
                   </div>
                   <div>
@@ -156,7 +156,7 @@ export default function AdminSettingsPage() {
                       type="email" 
                       value={session?.user?.email || ''}
                       disabled
-                      className="w-full bg-zinc-900 border border-zinc-800/50 rounded-xl px-4 py-2.5 text-sm text-zinc-500 cursor-not-allowed"
+                      className="w-full bg-black/20 border border-white/5 rounded-xl px-4 py-2.5 text-sm text-zinc-500 cursor-not-allowed"
                     />
                   </div>
                 </div>
@@ -179,7 +179,7 @@ export default function AdminSettingsPage() {
           </div>
 
           {/* Card: Reset Password */}
-          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl shadow-xl overflow-hidden relative group">
+          <div className="glass-panel rounded-2xl shadow-xl overflow-hidden relative group">
             <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 blur-[80px] rounded-full pointer-events-none" />
             
             <div className="p-6 border-b border-zinc-800/50 flex items-center gap-3 relative z-10">
@@ -195,7 +195,7 @@ export default function AdminSettingsPage() {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Masukkan password saat ini"
-                  className="w-full bg-zinc-950/60 backdrop-blur-sm border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/70 focus:ring-1 focus:ring-emerald-500/50 transition-all shadow-inner"
+                  className="w-full glass-panel rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/70 focus:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all"
                 />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -206,7 +206,7 @@ export default function AdminSettingsPage() {
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     placeholder="Minimal 6 karakter"
-                    className="w-full bg-zinc-950/60 backdrop-blur-sm border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/70 focus:ring-1 focus:ring-emerald-500/50 transition-all shadow-inner"
+                    className="w-full glass-panel rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/70 focus:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all"
                   />
                 </div>
                 <div>
@@ -216,7 +216,7 @@ export default function AdminSettingsPage() {
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     placeholder="Ulangi password baru"
-                    className="w-full bg-zinc-950/60 backdrop-blur-sm border border-zinc-800 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/70 focus:ring-1 focus:ring-emerald-500/50 transition-all shadow-inner"
+                    className="w-full glass-panel rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-emerald-500/70 focus:shadow-[0_0_15px_rgba(16,185,129,0.15)] transition-all"
                   />
                 </div>
               </div>
@@ -243,7 +243,7 @@ export default function AdminSettingsPage() {
         <div className="space-y-8">
           
           {/* Card: Notifikasi */}
-          <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl shadow-xl overflow-hidden relative">
+          <div className="glass-panel rounded-2xl shadow-xl overflow-hidden relative">
             <div className="p-6 border-b border-zinc-800/50 flex items-center gap-3">
               <Bell className="w-5 h-5 text-indigo-400" />
               <h2 className="text-lg font-bold text-white">Preferensi Notifikasi</h2>
@@ -299,7 +299,7 @@ export default function AdminSettingsPage() {
           </div>
 
           {/* Card: Danger Zone */}
-          <div className="bg-zinc-900/40 backdrop-blur-md border border-red-900/30 rounded-2xl shadow-xl overflow-hidden relative group">
+          <div className="bg-red-500/5 backdrop-blur-md border border-red-500/20 rounded-2xl shadow-xl overflow-hidden relative group">
             <div className="absolute top-0 right-0 w-48 h-48 bg-red-500/5 blur-[60px] rounded-full pointer-events-none" />
             
             <div className="p-6 border-b border-red-900/30 flex items-center gap-3 relative z-10">

@@ -12,13 +12,13 @@ export const authConfig = {
       const isAuthRoute = nextUrl.pathname === '/login' || nextUrl.pathname === '/register';
 
       if (isAuthRoute) {
-        if (isLoggedIn) return Response.redirect(new URL('/dashboard/portfolios', nextUrl));
+        if (isLoggedIn) return Response.redirect(new URL('/dashboard', nextUrl));
         return true;
       }
 
       if (isAdminRoute) {
         if (!isLoggedIn) return false;
-        if (auth?.user?.role !== 'ADMIN') return Response.redirect(new URL('/dashboard/portfolios', nextUrl));
+        if (auth?.user?.role !== 'ADMIN') return Response.redirect(new URL('/dashboard', nextUrl));
         return true;
       }
 

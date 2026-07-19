@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast';
 import { DataTable, Column } from '@/components/admin/DataTable';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import Link from 'next/link';
+import { CustomSelect } from '@/components/ui/CustomSelect';
 
 export default function AdminMessagesPage() {
   const [messages, setMessages] = useState<any[]>([]);
@@ -13,7 +14,6 @@ export default function AdminMessagesPage() {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [readFilter, setReadFilter] = useState('');
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
   
   // Selected Message for Modal
   const [selectedMessage, setSelectedMessage] = useState<any | null>(null);
@@ -140,7 +140,7 @@ export default function AdminMessagesPage() {
         </div>
       </div>
 
-      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-5 shadow-lg flex flex-col sm:flex-row gap-4 relative z-20">
+      <div className="glass-panel rounded-2xl p-5 shadow-lg flex flex-col sm:flex-row gap-4 relative z-20 overflow-visible">
         <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full" />
         </div>
@@ -151,45 +151,19 @@ export default function AdminMessagesPage() {
             placeholder="Cari pengirim, email, atau isi pesan..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-zinc-950/60 backdrop-blur-sm border border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500/70 focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
+            className="w-full pl-10 pr-4 py-2.5 glass-panel rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all"
           />
         </div>
-        <div className="relative z-10">
-          <button
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className={`w-full sm:w-[180px] flex items-center justify-between bg-zinc-950/60 backdrop-blur-sm border ${isFilterOpen ? 'border-cyan-500/70 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : 'border-zinc-800'} hover:border-zinc-700 hover:bg-zinc-900/60 rounded-xl px-4 py-2.5 text-sm text-white transition-all shadow-inner`}
-          >
-            <span>{readFilter === 'read' ? 'Sudah Dibaca' : readFilter === 'unread' ? 'Belum Dibaca' : 'Semua Status'}</span>
-            <Filter className={`h-4 w-4 transition-colors ${isFilterOpen || readFilter ? 'text-cyan-400' : 'text-zinc-500'}`} />
-          </button>
-
-          {/* Invisible Overlay to click outside */}
-          {isFilterOpen && (
-            <div 
-              className="fixed inset-0 z-20" 
-              onClick={() => setIsFilterOpen(false)} 
-            />
-          )}
-
-          {/* Dropdown Menu */}
-          <div className={`absolute right-0 sm:left-0 mt-2 w-[180px] bg-zinc-900/95 backdrop-blur-xl border border-zinc-700/50 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.5)] z-30 overflow-hidden transform origin-top transition-all duration-200 ${isFilterOpen ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}`}>
-            {[
+        <div className="w-full sm:w-48 flex-shrink-0 z-20">
+          <CustomSelect
+            value={readFilter}
+            onChange={setReadFilter}
+            options={[
               { value: '', label: 'Semua Status' },
               { value: 'unread', label: 'Belum Dibaca' },
               { value: 'read', label: 'Sudah Dibaca' }
-            ].map((option) => (
-              <button
-                key={option.value}
-                onClick={() => {
-                  setReadFilter(option.value);
-                  setIsFilterOpen(false);
-                }}
-                className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${readFilter === option.value ? 'bg-cyan-500/10 text-cyan-400 font-medium' : 'text-zinc-300 hover:bg-zinc-800'}`}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
+            ]}
+          />
         </div>
       </div>
 
@@ -208,7 +182,7 @@ export default function AdminMessagesPage() {
             onClick={() => setSelectedMessage(null)}
           ></div>
           <div className="flex min-h-full items-center justify-center p-4">
-            <div className="relative w-full max-w-2xl bg-zinc-900 border border-zinc-800 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="relative w-full max-w-2xl glass-panel rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
               
               <div className="flex justify-between items-center p-4 sm:p-6 border-b border-zinc-800">
                 <div className="flex items-center space-x-3">
@@ -260,7 +234,7 @@ export default function AdminMessagesPage() {
                 </div>
               </div>
 
-              <div className="bg-zinc-950 border-t border-zinc-800 p-4 sm:p-6 flex justify-end gap-3">
+              <div className="glass-panel p-4 sm:p-6 flex justify-end gap-3">
                 <button
                   onClick={() => handleToggleRead(selectedMessage.id, selectedMessage.isRead)}
                   className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white text-sm font-medium rounded-lg transition-colors"

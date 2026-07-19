@@ -7,6 +7,59 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Home, Folder, Users, MessageSquare, LogOut, Bell, Menu, Settings, X, Activity, PieChart, FileText, Archive, Star, Globe, Shield, Briefcase, Trophy } from 'lucide-react';
 import { toast } from 'sonner';
 
+// NavLink Component with Framer Motion and Glassmorphism aesthetics
+function NavLink({ href, icon, label, pathname, onClick, exact = false }: any) {
+  // Fix the active state bug where /dashboard is active for all sub-paths
+  const isExactRoot = exact || href === '/dashboard' || href === '/admin/dashboard';
+  const isActive = isExactRoot 
+    ? pathname === href 
+    : (pathname === href || pathname.startsWith(`${href}/`));
+  
+  return (
+    <Link href={href} onClick={onClick} className="block relative mb-1">
+      <motion.div
+        whileHover={{ x: 4, backgroundColor: 'rgba(255, 255, 255, 0.05)' }}
+        whileTap={{ scale: 0.98 }}
+        className={`group flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium transition-all duration-300 relative z-10
+          ${isActive 
+            ? 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 shadow-[0_0_15px_rgba(6,182,212,0.15)]' 
+            : 'text-zinc-400 hover:text-zinc-100'
+          }`}
+      >
+        <span className={`${isActive ? 'text-cyan-400' : 'text-zinc-500 group-hover:text-zinc-300'} transition-colors`}>
+          {icon}
+        </span>
+        {label}
+      </motion.div>
+    </Link>
+  );
+}
+
+function UserFooter({ user, onSignOut }: { user: any; onSignOut: () => void }) {
+  return (
+    <div className="p-4 border-t border-white/10 bg-white/[0.02]">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-cyan-500 to-purple-600 p-0.5">
+          <div className="w-full h-full rounded-full bg-zinc-950 flex items-center justify-center font-bold text-sm">
+            {user.name.substring(0, 2).toUpperCase()}
+          </div>
+        </div>
+        <div className="flex-1 overflow-hidden">
+          <p className="text-sm font-medium text-white truncate">{user.name}</p>
+          <p className="text-xs text-zinc-500 truncate">{user.email}</p>
+        </div>
+      </div>
+      <button
+        onClick={onSignOut}
+        className="flex w-full items-center gap-2 rounded-xl px-3 py-2 text-sm font-medium text-rose-400 hover:bg-rose-500/10 hover:text-rose-300 transition-colors border border-transparent hover:border-rose-500/20"
+      >
+        <LogOut size={18} />
+        Sign Out
+      </button>
+    </div>
+  );
+}
+
 export default function DashboardLayoutClient({
   children,
   user,
@@ -82,7 +135,7 @@ export default function DashboardLayoutClient({
       ) : (
         <>
           <NavLink href="/admin/dashboard" icon={<Home size={20} />} label="Overview" pathname={pathname} onClick={closeMobileMenu} />
-          <NavLink href="/admin/global" icon={<Globe size={20} />} label="Lihat Global" pathname={pathname} onClick={closeMobileMenu} />
+          <NavLink href="/admin/global" exact icon={<Globe size={20} />} label="Lihat Global" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/admin/global/manage" icon={<Shield size={20} />} label="Kelola Global" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/admin/users" icon={<Users size={20} />} label="Kelola User" pathname={pathname} onClick={closeMobileMenu} />
           <NavLink href="/admin/cv-logs" icon={<FileText size={20} />} label="Log Generate CV" pathname={pathname} onClick={closeMobileMenu} />
@@ -99,7 +152,13 @@ export default function DashboardLayoutClient({
   );
 
   return (
-    <div className="flex h-screen bg-zinc-950 text-zinc-50 overflow-hidden">
+    <div className="flex h-screen bg-[#050B14] text-zinc-50 overflow-hidden relative">
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-[30%] -left-[10%] w-[50%] h-[50%] rounded-full bg-cyan-900/20 blur-[120px]" />
+        <div className="absolute top-[60%] -right-[10%] w-[40%] h-[40%] rounded-full bg-purple-900/20 blur-[120px]" />
+      </div>
+
       {/* Mobile Sidebar Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -117,11 +176,11 @@ export default function DashboardLayoutClient({
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="fixed inset-y-0 left-0 z-50 w-64 flex flex-col border-r border-zinc-800/50 bg-zinc-950/90 backdrop-blur-xl md:hidden shadow-[4px_0_24px_rgba(0,0,0,0.5)]"
+              className="fixed inset-y-0 left-0 z-50 w-72 flex flex-col glass-panel md:hidden"
             >
-              <div className="flex h-16 items-center justify-between px-6 border-b border-zinc-800">
+              <div className="flex h-16 items-center justify-between px-6 border-b border-white/5">
                 <Link href="/" className="text-xl font-bold flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-black text-xs text-zinc-950 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-400 to-purple-500 flex items-center justify-center font-black text-xs text-white shadow-[0_0_15px_rgba(6,182,212,0.4)]">
                     HP
                   </div>
                   <span>
@@ -132,7 +191,7 @@ export default function DashboardLayoutClient({
                   <X size={20} />
                 </button>
               </div>
-              <nav className="flex-1 space-y-1 px-4 py-6">
+              <nav className="flex-1 space-y-1 px-4 py-6 overflow-y-auto custom-scrollbar">
                 {renderNavLinks()}
               </nav>
               <UserFooter user={user} onSignOut={onSignOut} />
@@ -142,26 +201,26 @@ export default function DashboardLayoutClient({
       </AnimatePresence>
 
       {/* Desktop Sidebar */}
-      <aside className="hidden w-64 flex-col border-r border-zinc-800/50 bg-zinc-950/80 backdrop-blur-xl md:flex shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
-        <div className="flex h-16 items-center px-6 border-b border-zinc-800">
-          <Link href="/" className="text-xl font-bold flex items-center gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center font-black text-xs text-zinc-950 shadow-[0_0_15px_rgba(6,182,212,0.3)]">
+      <aside className="hidden w-64 flex-col glass-panel md:flex z-20 border-r-0 border-r-white/5">
+        <div className="flex h-20 items-center px-6 border-b border-white/5">
+          <Link href="/" className="text-xl font-bold flex items-center gap-3 group">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-400 to-purple-600 flex items-center justify-center font-black text-xs text-white shadow-[0_0_20px_rgba(6,182,212,0.4)] group-hover:shadow-[0_0_25px_rgba(176,38,255,0.5)] transition-all">
               HP
             </div>
-            <span>
+            <span className="tracking-wide">
               Hgz<span className="text-cyan-400">Port</span>
             </span>
           </Link>
         </div>
-        <nav className="flex-1 space-y-1 px-4 py-6 relative">
+        <nav className="flex-1 space-y-1 px-4 py-6 relative overflow-y-auto custom-scrollbar">
           {renderNavLinks()}
         </nav>
         <UserFooter user={user} onSignOut={onSignOut} />
       </aside>
 
       {/* Main Content */}
-      <main className="flex flex-1 flex-col overflow-hidden">
-        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-zinc-800 bg-zinc-950/80 px-6 backdrop-blur-sm">
+      <main className="flex flex-1 flex-col overflow-hidden z-10">
+        <header className="sticky top-0 z-30 flex h-20 items-center justify-between border-b border-white/5 glass-panel px-6 backdrop-blur-md bg-transparent">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsMobileMenuOpen(true)}
@@ -234,72 +293,14 @@ export default function DashboardLayoutClient({
           </div>
         </header>
 
-        <div className="flex-1 overflow-auto bg-zinc-950 p-6 relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={pathname}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3, ease: 'easeOut' }}
-              className="h-full"
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
+        <div className="flex-1 overflow-auto bg-transparent p-6 relative custom-scrollbar">
+          <div className="h-full relative z-10">
+            {children}
+          </div>
         </div>
       </main>
     </div>
   );
 }
 
-function NavLink({ href, icon, label, pathname, onClick }: { href: string, icon: React.ReactNode, label: string, pathname: string, onClick?: () => void }) {
-  const isActive = pathname === href || pathname.startsWith(`${href}/`);
-  
-  return (
-    <Link 
-      href={href} 
-      onClick={onClick}
-      className={`group relative flex items-center gap-3 rounded-xl px-3 py-2.5 transition-all duration-300 ${
-        isActive ? 'text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.5)] font-semibold' : 'text-zinc-400 hover:bg-zinc-800/40 hover:text-zinc-100'
-      }`}
-    >
-      {isActive && (
-        <motion.div
-          layoutId="dashboardNavIndicator"
-          className="absolute inset-0 rounded-xl bg-gradient-to-r from-cyan-500/20 to-transparent border-l-2 border-cyan-400"
-          initial={false}
-          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        />
-      )}
-      <div className={`relative z-10 flex items-center gap-3 transition-transform duration-300 ${!isActive ? 'group-hover:translate-x-1' : ''}`}>
-        {icon}
-        <span className="tracking-wide">{label}</span>
-      </div>
-    </Link>
-  );
-}
 
-function UserFooter({ user, onSignOut }: { user: any, onSignOut: () => void }) {
-  return (
-    <div className="border-t border-zinc-800 p-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3 overflow-hidden">
-          <div className="h-8 w-8 rounded-full bg-cyan-500 flex items-center justify-center font-bold text-xs uppercase shrink-0 text-zinc-950">
-            {user.name?.charAt(0) || 'U'}
-          </div>
-          <div className="truncate text-sm">
-            <p className="font-medium truncate text-zinc-100">{user.name}</p>
-          </div>
-        </div>
-        <button 
-          onClick={onSignOut} 
-          className="p-2 text-zinc-400 hover:text-red-400 transition-colors shrink-0" 
-          title="Logout"
-        >
-          <LogOut size={18} />
-        </button>
-      </div>
-    </div>
-  );
-}

@@ -37,8 +37,9 @@ export default async function AnalyticsPage() {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="card p-6 bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><Eye size={64} /></div>
+        <div className="glass-panel glass-panel-hover p-6 rounded-3xl relative overflow-hidden group">
+          <div className="absolute -top-4 -right-4 w-24 h-24 bg-cyan-500/20 blur-[30px] group-hover:bg-cyan-500/30 transition-all" />
+          <div className="absolute top-0 right-0 p-4 opacity-10 text-cyan-400 group-hover:opacity-20 transition-opacity"><Eye size={64} /></div>
           <p className="text-zinc-400 text-sm font-medium mb-1">Total Kunjungan</p>
           <h3 className="text-4xl font-black text-white">{totalViews}</h3>
           <p className="text-emerald-400 text-xs mt-2 flex items-center gap-1">
@@ -46,15 +47,17 @@ export default async function AnalyticsPage() {
           </p>
         </div>
 
-        <div className="card p-6 bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><Download size={64} /></div>
+        <div className="glass-panel glass-panel-hover p-6 rounded-3xl relative overflow-hidden group">
+          <div className="absolute -top-4 -right-4 w-24 h-24 bg-purple-500/20 blur-[30px] group-hover:bg-purple-500/30 transition-all" />
+          <div className="absolute top-0 right-0 p-4 opacity-10 text-purple-400 group-hover:opacity-20 transition-opacity"><Download size={64} /></div>
           <p className="text-zinc-400 text-sm font-medium mb-1">CV di-Generate</p>
           <h3 className="text-4xl font-black text-white">{totalCvs}</h3>
           <p className="text-cyan-400 text-xs mt-2">Oleh Anda</p>
         </div>
 
-        <div className="card p-6 bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><Globe size={64} /></div>
+        <div className="glass-panel glass-panel-hover p-6 rounded-3xl relative overflow-hidden group">
+          <div className="absolute -top-4 -right-4 w-24 h-24 bg-emerald-500/20 blur-[30px] group-hover:bg-emerald-500/30 transition-all" />
+          <div className="absolute top-0 right-0 p-4 opacity-10 text-emerald-400 group-hover:opacity-20 transition-opacity"><Globe size={64} /></div>
           <p className="text-zinc-400 text-sm font-medium mb-1">Status Publikasi</p>
           <h3 className="text-xl font-bold text-white mt-2">
             {portfolio.isPublished ? <span className="text-emerald-400">Aktif Publik</span> : <span className="text-rose-400">Private / Draft</span>}
@@ -62,8 +65,9 @@ export default async function AnalyticsPage() {
           <p className="text-zinc-500 text-xs mt-2">Status Portofolio</p>
         </div>
         
-        <div className="card p-6 bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 p-4 opacity-10"><Clock size={64} /></div>
+        <div className="glass-panel glass-panel-hover p-6 rounded-3xl relative overflow-hidden group">
+          <div className="absolute -top-4 -right-4 w-24 h-24 bg-amber-500/20 blur-[30px] group-hover:bg-amber-500/30 transition-all" />
+          <div className="absolute top-0 right-0 p-4 opacity-10 text-amber-400 group-hover:opacity-20 transition-opacity"><Clock size={64} /></div>
           <p className="text-zinc-400 text-sm font-medium mb-1">Update Terakhir</p>
           <h3 className="text-lg font-bold text-white mt-2 truncate">
             {new Intl.DateTimeFormat('id-ID', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(portfolio.updatedAt))}
@@ -72,7 +76,8 @@ export default async function AnalyticsPage() {
         </div>
       </div>
 
-      <div className="mt-8 p-8 card bg-zinc-900/50 border border-zinc-800/50 rounded-3xl">
+      <div className="mt-8 p-8 glass-panel rounded-3xl relative overflow-hidden group">
+        <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-cyan-500/5 blur-[80px]" />
         <h3 className="text-xl font-bold text-white mb-6">Grafik Kunjungan (7 Hari Terakhir)</h3>
         
         {/* Simple Bar Chart Mockup */}
@@ -89,7 +94,7 @@ export default async function AnalyticsPage() {
               return (
                 <div key={day} className="w-full flex flex-col items-center gap-2 group cursor-pointer">
                   <div 
-                    className="w-full max-w-[40px] bg-cyan-500/20 group-hover:bg-cyan-400 rounded-t-md transition-all relative"
+                    className="w-full max-w-[40px] bg-gradient-to-t from-cyan-900/40 to-cyan-500/40 border-t border-cyan-400/50 group-hover:to-cyan-400 group-hover:shadow-[0_0_15px_rgba(6,182,212,0.5)] rounded-t-lg transition-all relative"
                     style={{ height: `${height}%` }}
                   >
                     <div className="absolute -top-8 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-zinc-800 text-xs px-2 py-1 rounded text-white transition-opacity">

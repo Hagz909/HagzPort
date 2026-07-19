@@ -225,7 +225,7 @@ export default function SettingsPage({ params }: { params: Promise<{ portfolioId
               )}
 
               <div className="flex mt-2">
-                <span className={`inline-flex items-center px-3 rounded-l-md border border-r-0 ${usernameChangedAt ? 'border-amber-500/30 bg-amber-500/5 text-amber-500/70' : 'border-zinc-700 bg-zinc-800 text-zinc-400'} sm:text-sm`}>
+                <span className="inline-flex items-center rounded-l-xl border border-r-0 border-zinc-700/80 bg-zinc-900/80 px-4 text-zinc-500 text-sm transition-colors group-focus-within:border-cyan-500/50 group-focus-within:text-cyan-400">
                   hgzport.com/
                 </span>
                 <input

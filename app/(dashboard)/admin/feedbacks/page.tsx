@@ -56,7 +56,7 @@ export default function AdminFeedbacksPage() {
         </div>
 
         {/* Dashboard Stats */}
-        <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800 rounded-2xl px-6 py-4 flex gap-8">
+        <div className="glass-panel rounded-2xl px-6 py-4 flex gap-8">
           <div>
             <div className="text-xs text-zinc-500 uppercase font-bold tracking-wider mb-1">Total Ulasan</div>
             <div className="text-2xl font-black text-white">{feedbacks.length}</div>
@@ -71,7 +71,7 @@ export default function AdminFeedbacksPage() {
       </div>
 
       {feedbacks.length === 0 ? (
-        <div className="py-20 text-center bg-zinc-900/30 border border-zinc-800/50 rounded-2xl">
+        <div className="py-20 text-center glass-panel rounded-2xl">
           <MessageSquare className="w-12 h-12 text-zinc-600 mx-auto mb-4" />
           <h2 className="text-xl font-bold text-zinc-400 mb-2">Belum ada ulasan yang masuk</h2>
           <p className="text-sm text-zinc-500 max-w-md mx-auto">Sistem akan menangkap ulasan baru ketika ada pengguna yang menyelesaikan pembuatan CV mereka.</p>
@@ -79,7 +79,7 @@ export default function AdminFeedbacksPage() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {feedbacks.map((fb) => (
-            <div key={fb.id} className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800 rounded-2xl p-6 transition-colors hover:border-zinc-700 relative overflow-hidden group">
+            <div key={fb.id} className="glass-panel glass-panel-hover rounded-2xl p-6 relative overflow-hidden group">
               <div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 blur-[50px] rounded-full pointer-events-none group-hover:bg-amber-500/10 transition-colors" />
               
               <div className="flex justify-between items-start mb-4 relative z-10">

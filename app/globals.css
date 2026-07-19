@@ -1,7 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Aldrich&family=Montenegrin+Gothic+One&family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Saira+Stencil+One&display=swap');
 @import "tailwindcss";
 
+@theme {
+  --color-cyber-teal: #00f0ff;
+  --color-neon-violet: #b026ff;
+  --color-glass-bg: rgba(15, 23, 42, 0.6);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+}
+
 @layer utilities {
+  .glass-panel {
+    background-color: var(--color-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--color-glass-border);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-panel-hover {
+    transition: all 0.3s ease;
+  }
+  .glass-panel-hover:hover {
+    background-color: rgba(30, 41, 59, 0.7);
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 240, 255, 0.1);
+  }
   .montenegrin-gothic-one-regular {
     font-family: "Montenegrin Gothic One", serif !important;
     font-weight: 400;

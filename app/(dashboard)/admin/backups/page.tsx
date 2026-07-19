@@ -72,7 +72,7 @@ export default function BackupsPage() {
         </div>
       </div>
 
-      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+      <div className="glass-panel rounded-2xl p-6 shadow-xl relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/5 blur-[100px] rounded-full pointer-events-none" />
         
         <div className="relative z-10">
@@ -87,7 +87,7 @@ export default function BackupsPage() {
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {backups.map((backup) => (
-                <div key={backup.id} className="bg-zinc-950/60 border border-zinc-800 rounded-xl p-5 hover:border-emerald-500/30 transition-all group shadow-sm flex flex-col justify-between">
+                <div key={backup.id} className="glass-panel glass-panel-hover rounded-xl p-5 group shadow-sm flex flex-col justify-between">
                   <div>
                     <div className="flex justify-between items-start mb-4">
                       <div className="flex items-center gap-2">

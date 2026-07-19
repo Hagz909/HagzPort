@@ -85,7 +85,7 @@ export default function LoginPage() {
       }
 
       toast.success('Berhasil login!');
-      router.push('/dashboard/portfolios');
+      router.push('/dashboard');
       router.refresh(); 
     } catch (error) {
       console.error(error);

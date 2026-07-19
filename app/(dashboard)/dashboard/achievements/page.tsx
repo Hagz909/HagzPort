@@ -97,7 +97,8 @@ export default async function GamificationPage() {
         description="Selesaikan tantangan untuk membuka lencana khusus dan tunjukkan dedikasi Anda sebagai kreator portofolio."
       />
 
-      <div className="mb-8 p-6 card bg-gradient-to-r from-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl flex flex-col md:flex-row items-center gap-6">
+      <div className="mb-8 p-8 glass-panel rounded-3xl flex flex-col md:flex-row items-center gap-8 relative overflow-hidden group">
+        <div className="absolute -top-10 -right-10 w-48 h-48 bg-amber-500/10 rounded-full blur-[60px]" />
         <div className="w-24 h-24 bg-cyan-500/10 rounded-full flex items-center justify-center border-4 border-cyan-500/20 shrink-0 relative">
           <Trophy className="text-cyan-400" size={40} />
           <div className="absolute -bottom-2 -right-2 bg-zinc-900 border border-zinc-700 text-xs font-bold px-2 py-1 rounded text-white">
@@ -120,34 +121,43 @@ export default async function GamificationPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {BADGES.map(badge => {
+        {BADGES.map((badge) => {
           const Icon = badge.icon;
           return (
             <div 
               key={badge.id}
-              className={`card p-6 border rounded-2xl relative overflow-hidden transition-all duration-300 ${badge.isUnlocked ? 'bg-zinc-900 border-zinc-700' : 'bg-zinc-950 border-zinc-900/50 grayscale opacity-70'}`}
+              className={`glass-panel glass-panel-hover p-6 rounded-3xl relative overflow-hidden flex flex-col justify-between group transition-all duration-300 ${
+                badge.isUnlocked ? 'border-cyan-500/30' : 'opacity-70 grayscale border-white/5'
+              }`}
             >
-              <div className="flex items-start gap-4">
-                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 border ${badge.isUnlocked ? `${badge.bg} ${badge.color} ${badge.border}` : 'bg-zinc-900 text-zinc-600 border-zinc-800'}`}>
-                  <Icon size={28} />
+              <div className="flex justify-between items-start mb-6">
+                <div className={`p-4 rounded-2xl border ${badge.isUnlocked ? badge.bg + ' ' + badge.border : 'bg-zinc-800 border-zinc-700'}`}>
+                  <Icon className={`w-8 h-8 ${badge.isUnlocked ? badge.color : 'text-zinc-500'}`} />
                 </div>
-                <div>
-                  <h3 className={`font-bold mb-1 ${badge.isUnlocked ? 'text-white' : 'text-zinc-500'}`}>
-                    {badge.title}
-                  </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed">
-                    {badge.description}
-                  </p>
-                </div>
+                {!badge.isUnlocked && (
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-wider bg-black/40 px-3 py-1 rounded-full border border-white/5 backdrop-blur-md">Terkunci</span>
+                )}
+                {badge.isUnlocked && (
+                  <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 backdrop-blur-md flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.2)]">
+                    <Star size={10} className="fill-emerald-400" /> Dimiliki
+                  </span>
+                )}
               </div>
               
-              {!badge.isUnlocked && (
-                <div className="absolute top-3 right-3 text-[10px] font-bold tracking-widest text-zinc-600 uppercase">
-                  LOCKED
-                </div>
+              <div>
+                <h3 className={`text-xl font-bold mb-2 ${badge.isUnlocked ? 'text-white' : 'text-zinc-400'}`}>
+                  {badge.title}
+                </h3>
+                <p className="text-zinc-400 text-sm leading-relaxed">
+                  {badge.description}
+                </p>
+              </div>
+
+              {badge.isUnlocked && (
+                <div className={`absolute -bottom-8 -right-8 w-32 h-32 ${badge.bg} rounded-full blur-[40px] opacity-50 group-hover:opacity-80 transition-opacity`} />
               )}
             </div>
-          )
+          );
         })}
       </div>
     </div>

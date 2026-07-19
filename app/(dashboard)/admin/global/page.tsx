@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { Globe, Search, ExternalLink, Users, TrendingUp, Calendar, Eye } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { CustomSelect } from '@/components/ui/CustomSelect';
 
 interface GlobalPortfolio {
   id: string;
@@ -76,9 +77,9 @@ export default function AdminGlobalPage() {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {[
-          { label: 'Total Global', value: stats.totalGlobal, icon: <Globe size={18} />, color: 'text-cyan-400', bg: 'bg-cyan-500/10 border-cyan-500/20' },
-          { label: 'Baru Minggu Ini', value: stats.newThisWeek, icon: <TrendingUp size={18} />, color: 'text-emerald-400', bg: 'bg-emerald-500/10 border-emerald-500/20' },
-          { label: 'Total Dipublikasikan', value: stats.totalPublished, icon: <Users size={18} />, color: 'text-amber-400', bg: 'bg-amber-500/10 border-amber-500/20' },
+          { label: 'Total Global', value: stats.totalGlobal, icon: <Globe size={18} />, color: 'text-cyan-400', bg: 'glass-panel glass-panel-hover border-cyan-500/30' },
+          { label: 'Baru Minggu Ini', value: stats.newThisWeek, icon: <TrendingUp size={18} />, color: 'text-emerald-400', bg: 'glass-panel glass-panel-hover border-emerald-500/30' },
+          { label: 'Total Dipublikasikan', value: stats.totalPublished, icon: <Users size={18} />, color: 'text-amber-400', bg: 'glass-panel glass-panel-hover border-amber-500/30' },
         ].map((stat, i) => (
           <motion.div
             key={i}
@@ -99,40 +100,42 @@ export default function AdminGlobalPage() {
       {/* Filters */}
       <div className="flex flex-col sm:flex-row gap-4">
         <div className="relative flex-1">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-500" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Cari berdasarkan nama, username, atau email..."
-            className="w-full pl-10 pr-4 py-2.5 bg-zinc-900/60 border border-zinc-800 rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 glass-panel rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all"
           />
         </div>
-        <select
-          value={status}
-          onChange={(e) => setStatus(e.target.value)}
-          className="px-4 py-2.5 bg-zinc-900/60 border border-zinc-800 rounded-xl text-sm text-zinc-300 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 cursor-pointer"
-        >
-          <option value="all">Semua Status</option>
-          <option value="published">Global Aktif</option>
-          <option value="unpublished">Belum Global</option>
-        </select>
+        <div className="w-48 flex-shrink-0 z-20">
+          <CustomSelect
+            value={status}
+            onChange={setStatus}
+            options={[
+              { value: 'all', label: 'Semua Status' },
+              { value: 'published', label: 'Global Aktif' },
+              { value: 'unpublished', label: 'Belum Global' },
+            ]}
+          />
+        </div>
       </div>
 
       {/* Table */}
       {isLoading ? (
         <div className="space-y-3">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="h-16 bg-zinc-900/50 rounded-xl animate-pulse border border-zinc-800/50" />
+            <div key={i} className="h-16 glass-panel animate-pulse" />
           ))}
         </div>
       ) : portfolios.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 text-center">
+        <div className="flex flex-col items-center justify-center py-16 text-center glass-panel">
           <Globe className="w-12 h-12 text-zinc-600 mb-4" />
           <p className="text-zinc-400">Tidak ada portfolio yang ditemukan.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto glass-panel border-none p-1">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-zinc-800 text-zinc-500 text-xs uppercase tracking-wider">
@@ -152,7 +155,7 @@ export default function AdminGlobalPage() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: index * 0.03 }}
-                  className="hover:bg-zinc-900/40 transition-colors"
+                  className="hover:bg-white/5 transition-colors group"
                 >
                   <td className="py-3 px-4">
                     <div className="flex items-center gap-3">

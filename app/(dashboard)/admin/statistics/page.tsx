@@ -37,7 +37,7 @@ const CircularProgress = ({ value, max, icon: Icon, color, stroke, glow, title }
   }, [value]);
 
   return (
-    <div className="flex flex-col items-center justify-center bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-6 shadow-xl relative overflow-hidden group">
+    <div className="flex flex-col items-center justify-center glass-panel glass-panel-hover rounded-2xl p-6 relative overflow-hidden group">
       <div className={`absolute top-0 right-0 w-32 h-32 blur-3xl opacity-10 group-hover:opacity-30 transition-opacity duration-700 rounded-full bg-current ${color}`} />
       
       <div className="relative w-36 h-36 mb-5">
@@ -151,15 +151,15 @@ export default function StatisticsPage() {
         </div>
         
         {/* Filter Waktu */}
-        <div className="flex bg-zinc-950/60 backdrop-blur-md border border-zinc-800 p-1.5 rounded-xl shadow-inner">
+        <div className="flex glass-panel p-1.5 rounded-xl">
           {periods.map((p) => (
             <button
               key={p.key}
               onClick={() => setPeriod(p.key)}
               className={`px-5 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                 period === p.key
-                  ? 'bg-zinc-800/80 text-white shadow-md border border-zinc-700/50'
-                  : 'text-zinc-500 hover:text-zinc-300 hover:bg-zinc-900/50 border border-transparent'
+                  ? 'bg-cyan-500/20 text-cyan-400 shadow-md border border-cyan-500/30'
+                  : 'text-zinc-500 hover:text-zinc-300 hover:bg-white/5 border border-transparent'
               }`}
             >
               {p.label}
@@ -181,7 +181,7 @@ export default function StatisticsPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1 bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-6 shadow-xl relative overflow-hidden flex flex-col justify-center">
+            <div className="lg:col-span-1 glass-panel rounded-2xl p-6 relative overflow-hidden flex flex-col justify-center">
               <div className="absolute -left-20 -bottom-20 w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full pointer-events-none" />
               <h3 className="text-lg font-bold text-white mb-4 relative z-10 flex items-center gap-2">
                 <PieChart className="w-5 h-5 text-cyan-400" />
@@ -201,7 +201,7 @@ export default function StatisticsPage() {
               </p>
             </div>
 
-            <div className="lg:col-span-2 bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-6 shadow-xl relative">
+            <div className="lg:col-span-2 glass-panel rounded-2xl p-6 relative">
               <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2">
                 <TrendingUp className="w-5 h-5 text-emerald-400" />
                 Tren Aktivitas Sistem

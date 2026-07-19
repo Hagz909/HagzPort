@@ -7,6 +7,7 @@ import { DataTable, Column } from '@/components/admin/DataTable';
 import { StatusBadge } from '@/components/admin/StatusBadge';
 import { ConfirmDialog } from '@/components/admin/ConfirmDialog';
 import Link from 'next/link';
+import { CustomSelect } from '@/components/ui/CustomSelect';
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState<any[]>([]);
@@ -14,7 +15,6 @@ export default function AdminUsersPage() {
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [roleFilter, setRoleFilter] = useState('');
-  const [isRoleFilterOpen, setIsRoleFilterOpen] = useState(false);
   
   // Modals state
   const [confirmDialog, setConfirmDialog] = useState<{
@@ -184,7 +184,7 @@ export default function AdminUsersPage() {
         </div>
       </div>
 
-      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-5 shadow-lg flex flex-col sm:flex-row gap-4 relative z-20">
+      <div className="glass-panel rounded-2xl p-5 shadow-lg flex flex-col sm:flex-row gap-4 relative z-20 overflow-visible">
         <div className="absolute inset-0 overflow-hidden rounded-2xl pointer-events-none">
           <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 blur-[80px] rounded-full" />
         </div>
@@ -195,45 +195,19 @@ export default function AdminUsersPage() {
             placeholder="Cari nama atau email..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-zinc-950/60 backdrop-blur-sm border border-zinc-800 rounded-xl pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-cyan-500/70 focus:ring-1 focus:ring-cyan-500/50 transition-all shadow-inner"
+            className="w-full pl-10 pr-4 py-2.5 glass-panel rounded-xl text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-cyan-500/50 focus:shadow-[0_0_15px_rgba(6,182,212,0.15)] transition-all"
           />
         </div>
-        <div className="relative z-10">
-          <button
-            onClick={() => setIsRoleFilterOpen(!isRoleFilterOpen)}
-            className={`w-full sm:w-[180px] flex items-center justify-between bg-zinc-950/60 backdrop-blur-sm border ${isRoleFilterOpen ? 'border-cyan-500/70 shadow-[0_0_15px_rgba(6,182,212,0.2)]' : 'border-zinc-800'} hover:border-zinc-700 hover:bg-zinc-900/60 rounded-xl px-4 py-2.5 text-sm text-white transition-all shadow-inner`}
-          >
-            <span>{roleFilter === 'ADMIN' ? 'Admin' : roleFilter === 'USER' ? 'User' : 'Semua Peran'}</span>
-            <Filter className={`h-4 w-4 transition-colors ${isRoleFilterOpen || roleFilter ? 'text-cyan-400' : 'text-zinc-500'}`} />
-          </button>
-
-          {/* Invisible Overlay to click outside */}
-          {isRoleFilterOpen && (
-            <div 
-              className="fixed inset-0 z-20" 
-              onClick={() => setIsRoleFilterOpen(false)} 
-            />
-          )}
-
-          {/* Dropdown Menu */}
-          <div className={`absolute right-0 sm:left-0 mt-2 w-[180px] bg-zinc-900/95 backdrop-blur-xl border border-zinc-700/50 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.5)] z-30 overflow-hidden transform origin-top transition-all duration-200 ${isRoleFilterOpen ? 'opacity-100 scale-100 translate-y-0 visible' : 'opacity-0 scale-95 -translate-y-2 invisible'}`}>
-            {[
+        <div className="w-full sm:w-48 flex-shrink-0 z-20">
+          <CustomSelect
+            value={roleFilter}
+            onChange={setRoleFilter}
+            options={[
               { value: '', label: 'Semua Peran' },
               { value: 'ADMIN', label: 'Admin' },
               { value: 'USER', label: 'User' }
-            ].map((option) => (
-              <button
-                key={option.value}
-                onClick={() => {
-                  setRoleFilter(option.value);
-                  setIsRoleFilterOpen(false);
-                }}
-                className={`w-full text-left px-4 py-2.5 text-sm transition-colors ${roleFilter === option.value ? 'bg-cyan-500/10 text-cyan-400 font-medium' : 'text-zinc-300 hover:bg-zinc-800'}`}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
+            ]}
+          />
         </div>
       </div>
 

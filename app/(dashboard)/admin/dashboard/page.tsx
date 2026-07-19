@@ -91,8 +91,8 @@ export default function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((card, i) => (
-          <div key={i} className="group relative bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-6 shadow-lg hover:shadow-[0_8px_30px_rgba(6,182,212,0.15)] hover:-translate-y-1.5 hover:border-cyan-500/30 transition-all duration-300 overflow-hidden">
-            <div className={`absolute -top-6 -right-6 w-32 h-32 blur-3xl opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-full ${card.glow}`} />
+          <div key={i} className="group relative glass-panel glass-panel-hover p-6 rounded-2xl overflow-hidden">
+            <div className={`absolute -top-6 -right-6 w-32 h-32 blur-[50px] opacity-20 group-hover:opacity-40 transition-opacity duration-300 rounded-full ${card.glow}`} />
             
             <div className="flex items-center justify-between mb-4 relative z-10">
               <div className={`p-3 rounded-xl border border-zinc-700/30 ${card.bg}`}>
@@ -112,7 +112,7 @@ export default function AdminDashboardPage() {
         ))}
       </div>
 
-      <div className="bg-zinc-900/40 backdrop-blur-md border border-zinc-800/50 rounded-2xl p-6 shadow-xl relative overflow-hidden">
+      <div className="glass-panel p-6 rounded-2xl relative overflow-hidden mt-6">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyan-500/5 blur-[100px] rounded-full pointer-events-none" />
         
         <div className="flex justify-between items-center mb-6 relative z-10">
@@ -130,7 +130,7 @@ export default function AdminDashboardPage() {
             <p className="py-8 text-center text-zinc-500">Belum ada pengguna terdaftar.</p>
           ) : (
             stats?.recentUsers?.map((user) => (
-              <div key={user.id} className="py-4 flex items-center justify-between hover:bg-zinc-800/40 px-4 -mx-4 rounded-xl transition-colors group">
+              <div key={user.id} className="py-4 flex items-center justify-between hover:bg-white/5 px-4 -mx-4 rounded-xl transition-colors group">
                 <div className="flex items-center space-x-4">
                   {user.image ? (
                     <Image src={user.image} alt={user.name} width={40} height={40} className="rounded-full bg-zinc-800 object-cover border border-zinc-700 group-hover:border-cyan-500/50 transition-colors" />

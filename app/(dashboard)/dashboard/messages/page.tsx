@@ -7,6 +7,7 @@ import { toast } from 'react-hot-toast';
 import { ConfirmDialog } from '@/components/admin/ConfirmDialog';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CustomSelect } from '@/components/ui/CustomSelect';
 
 function MessagesContent() {
   const searchParams = useSearchParams();
@@ -131,9 +132,11 @@ function MessagesContent() {
     <div className="max-w-6xl mx-auto space-y-6 animate-in fade-in duration-500">
       
       {/* Header & Tabs */}
-      <div className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800/80 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col xl:flex-row xl:items-center justify-between gap-6 relative overflow-hidden">
+      <div className="bg-zinc-900/50 backdrop-blur-xl border border-zinc-800/80 rounded-3xl p-6 md:p-8 shadow-2xl flex flex-col xl:flex-row xl:items-center justify-between gap-6 relative z-20 overflow-visible">
         {/* Glow effect */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px] pointer-events-none -z-10"></div>
+        <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none -z-10">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-cyan-500/5 rounded-full blur-[80px]"></div>
+        </div>
         
         <div>
           <h1 className="text-3xl font-bold text-white flex items-center mb-6 tracking-tight">
@@ -194,17 +197,16 @@ function MessagesContent() {
               Tandai semua dibaca
             </button>
           )}
-          <div className="relative group">
-            <select
+          <div className="w-full sm:w-48 relative z-20">
+            <CustomSelect
               value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="appearance-none bg-zinc-950/80 backdrop-blur-sm border border-zinc-800 group-hover:border-zinc-700 rounded-xl px-5 py-2.5 pr-12 text-sm text-white font-medium focus:outline-none focus:border-cyan-500 transition-all cursor-pointer shadow-inner"
-            >
-              <option value="all">Semua Status</option>
-              <option value="unread">Belum Dibaca</option>
-              <option value="read">Sudah Dibaca</option>
-            </select>
-            <Filter className="absolute right-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500 pointer-events-none" />
+              onChange={setFilter}
+              options={[
+                { value: 'all', label: 'Semua Status' },
+                { value: 'unread', label: 'Belum Dibaca' },
+                { value: 'read', label: 'Sudah Dibaca' }
+              ]}
+            />
           </div>
         </div>
       </div>
