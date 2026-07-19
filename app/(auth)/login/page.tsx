@@ -116,12 +116,12 @@ export default function LoginPage() {
     <div 
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={`relative flex min-h-screen items-center justify-center px-4 pt-28 pb-12 overflow-hidden transition-colors duration-700 ${isDark ? 'bg-zinc-950' : 'bg-slate-50'}`}
+      className={`relative flex min-h-screen items-center justify-center px-4 pt-28 pb-12 overflow-hidden transition-colors duration-700 ${isDark ? 'bg-[#020617]' : 'bg-slate-50'}`}
       style={{
         backgroundImage: isDark ? `
-          radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(6,182,212,0.15), transparent 40%),
-          linear-gradient(rgba(6,182,212,0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(6,182,212,0.05) 1px, transparent 1px)
+          radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0,240,255,0.15), transparent 40%),
+          linear-gradient(rgba(0,240,255,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0,240,255,0.05) 1px, transparent 1px)
         ` : `
           radial-gradient(circle 800px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(14,165,233,0.08), transparent 40%),
           linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px),
@@ -138,7 +138,7 @@ export default function LoginPage() {
         suppressHydrationWarning
         className={`absolute top-6 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full backdrop-blur-md border transition-all duration-300 hover:scale-110 ${
           isDark 
-            ? 'bg-zinc-900/50 border-cyan-500/30 text-cyan-400 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)]' 
+            ? 'bg-zinc-900/50 border-[#00f0ff]/30 text-[#00f0ff] hover:shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
             : 'bg-white/50 border-slate-200 text-sky-600 hover:shadow-[0_0_15px_rgba(14,165,233,0.2)]'
         }`}
         title={isDark ? "Beralih ke Putih Elegant" : "Beralih ke Dark Glow"}
@@ -151,7 +151,7 @@ export default function LoginPage() {
         href="/"
         className={`absolute top-6 left-6 z-50 flex items-center justify-center gap-2 px-4 h-12 rounded-xl backdrop-blur-md border transition-all duration-300 hover:scale-105 ${
           isDark 
-            ? 'bg-zinc-900/50 border-cyan-500/30 text-cyan-400 hover:text-cyan-300 hover:shadow-[0_0_15px_rgba(6,182,212,0.4)]' 
+            ? 'bg-zinc-900/50 border-[#00f0ff]/30 text-[#00f0ff] hover:text-[#b026ff] hover:shadow-[0_0_15px_rgba(0,240,255,0.4)]' 
             : 'bg-white/50 border-slate-200 text-sky-600 hover:text-sky-500 hover:shadow-[0_0_15px_rgba(14,165,233,0.2)]'
         }`}
         title="Kembali ke Beranda"
@@ -164,11 +164,11 @@ export default function LoginPage() {
         {isDark ? (
           <>
             <div className="orb orb-1 opacity-20" />
-            <div className="orb orb-2 opacity-10 bg-blue-500" />
+            <div className="orb orb-2 opacity-10 bg-[#b026ff]" />
             <div className="orb orb-3 opacity-20" />
-            <div className="absolute top-0 left-[15%] w-[1px] h-full bg-gradient-to-b from-transparent via-cyan-500/50 to-transparent animate-scanline" />
+            <div className="absolute top-0 left-[15%] w-[1px] h-full bg-gradient-to-b from-transparent via-[#00f0ff]/50 to-transparent animate-scanline" />
             <div className="absolute top-0 right-[25%] w-[1px] h-full bg-gradient-to-b from-transparent via-sky-500/30 to-transparent animate-scanline-delayed" />
-            <div className="absolute top-0 left-[60%] w-[1px] h-full bg-gradient-to-b from-transparent via-cyan-400/20 to-transparent animate-scanline" style={{ animationDelay: '-6s', animationDuration: '15s' }} />
+            <div className="absolute top-0 left-[60%] w-[1px] h-full bg-gradient-to-b from-transparent via-[#00f0ff]/20 to-transparent animate-scanline" style={{ animationDelay: '-6s', animationDuration: '15s' }} />
           </>
         ) : (
           <>
@@ -187,17 +187,17 @@ export default function LoginPage() {
         <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
           <div 
             className={`w-full max-w-md relative rounded-2xl border p-8 backdrop-blur-xl group transition-colors duration-500 ${
-              isDark ? 'border-cyan-500/20' : 'border-slate-200/60'
+              isDark ? 'border-[#00f0ff]/20' : 'border-slate-200/60'
             }`}
             style={{
-              background: isDark ? 'rgba(9, 9, 14, 0.7)' : 'rgba(255, 255, 255, 0.85)',
+              background: isDark ? 'rgba(2, 6, 23, 0.7)' : 'rgba(255, 255, 255, 0.85)',
               boxShadow: isDark 
-                ? '0 0 0 1px rgba(6,182,212,0.1), 0 25px 60px -12px rgba(0,0,0,0.8), inset 0 0 80px rgba(6,182,212,0.03)'
+                ? '0 0 0 1px rgba(0,240,255,0.1), 0 25px 60px -12px rgba(0,0,0,0.8), inset 0 0 80px rgba(0,240,255,0.03)'
                 : '0 0 0 1px rgba(0,0,0,0.02), 0 20px 40px -12px rgba(0,0,0,0.08), inset 0 0 80px rgba(255,255,255,0.6)'
             }}
           >
             {isDark && (
-              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-80" />
+              <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent opacity-80" />
             )}
             {!isDark && (
               <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-sky-300 to-transparent opacity-60" />
@@ -225,19 +225,19 @@ export default function LoginPage() {
                     suppressHydrationWarning
                     className={`w-full h-11 rounded-md border px-4 py-2 text-sm transition-all duration-300 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 ${
                       isDark 
-                        ? 'border-cyan-500/20 bg-black/60 text-zinc-100 placeholder-zinc-600 focus:border-cyan-500' 
+                        ? 'border-[#00f0ff]/20 bg-black/60 text-zinc-100 placeholder-zinc-600 focus:border-[#00f0ff]' 
                         : 'border-slate-300/60 bg-white/70 text-slate-900 placeholder-slate-400 focus:border-sky-500'
                     }`}
                     style={{ boxShadow: '0 0 0 1px transparent' }}
                     onFocus={(e) => {
                       e.target.style.boxShadow = isDark 
-                        ? '0 0 0 1px rgba(6,182,212,0.4), 0 0 20px rgba(6,182,212,0.15)'
+                        ? '0 0 0 1px rgba(0,240,255,0.4), 0 0 20px rgba(0,240,255,0.15)'
                         : '0 0 0 1px rgba(14,165,233,0.3), 0 0 15px rgba(14,165,233,0.1)';
-                      e.target.style.borderColor = isDark ? 'rgba(6,182,212,0.8)' : 'rgba(14,165,233,0.6)';
+                      e.target.style.borderColor = isDark ? 'rgba(0,240,255,0.8)' : 'rgba(14,165,233,0.6)';
                     }}
                     onBlur={(e) => {
                       e.target.style.boxShadow = '0 0 0 1px transparent';
-                      e.target.style.borderColor = isDark ? 'rgba(6,182,212,0.2)' : 'rgba(203,213,225,0.6)'; 
+                      e.target.style.borderColor = isDark ? 'rgba(0,240,255,0.2)' : 'rgba(203,213,225,0.6)'; 
                     }}
                     placeholder="Isi email Anda..."
                     disabled={isLoading}
@@ -259,19 +259,19 @@ export default function LoginPage() {
                     suppressHydrationWarning
                     className={`w-full h-11 rounded-md border pl-4 pr-11 py-2 text-sm transition-all duration-300 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:opacity-50 ${
                       isDark 
-                        ? 'border-cyan-500/20 bg-black/60 text-zinc-100 placeholder-zinc-600 focus:border-cyan-500' 
+                        ? 'border-[#00f0ff]/20 bg-black/60 text-zinc-100 placeholder-zinc-600 focus:border-[#00f0ff]' 
                         : 'border-slate-300/60 bg-white/70 text-slate-900 placeholder-slate-400 focus:border-sky-500'
                     }`}
                     style={{ boxShadow: '0 0 0 1px transparent' }}
                     onFocus={(e) => {
                       e.target.style.boxShadow = isDark 
-                        ? '0 0 0 1px rgba(6,182,212,0.4), 0 0 20px rgba(6,182,212,0.15)'
+                        ? '0 0 0 1px rgba(0,240,255,0.4), 0 0 20px rgba(0,240,255,0.15)'
                         : '0 0 0 1px rgba(14,165,233,0.3), 0 0 15px rgba(14,165,233,0.1)';
-                      e.target.style.borderColor = isDark ? 'rgba(6,182,212,0.8)' : 'rgba(14,165,233,0.6)';
+                      e.target.style.borderColor = isDark ? 'rgba(0,240,255,0.8)' : 'rgba(14,165,233,0.6)';
                     }}
                     onBlur={(e) => {
                       e.target.style.boxShadow = '0 0 0 1px transparent';
-                      e.target.style.borderColor = isDark ? 'rgba(6,182,212,0.2)' : 'rgba(203,213,225,0.6)';
+                      e.target.style.borderColor = isDark ? 'rgba(0,240,255,0.2)' : 'rgba(203,213,225,0.6)';
                     }}
                     placeholder="••••••••"
                     disabled={isLoading}
@@ -280,7 +280,7 @@ export default function LoginPage() {
                     type="button"
                     suppressHydrationWarning
                     className={`absolute inset-y-0 right-0 flex items-center pr-3 transition-colors ${
-                      isDark ? 'text-zinc-500 hover:text-cyan-400' : 'text-slate-400 hover:text-sky-600'
+                      isDark ? 'text-zinc-500 hover:text-[#00f0ff]' : 'text-slate-400 hover:text-sky-600'
                     }`}
                     onClick={() => setShowPassword(!showPassword)}
                   >
@@ -297,22 +297,22 @@ export default function LoginPage() {
                 suppressHydrationWarning
                 className={`btn-shimmer relative w-full h-12 flex items-center justify-center overflow-hidden rounded-md text-sm font-bold uppercase tracking-[0.1em] text-white transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-4 ${
                   isDark 
-                    ? 'bg-gradient-to-r from-cyan-600 to-cyan-500' 
+                    ? 'bg-gradient-to-r from-[#00f0ff] to-[#b026ff]' 
                     : 'bg-gradient-to-r from-sky-500 to-blue-600'
                 }`}
                 style={{ 
-                  boxShadow: isDark ? '0 0 20px rgba(6,182,212,0.3)' : '0 10px 20px rgba(14,165,233,0.2)' 
+                  boxShadow: isDark ? '0 0 20px rgba(0,240,255,0.3)' : '0 10px 20px rgba(14,165,233,0.2)' 
                 }}
                 onMouseEnter={(e) => {
                   if (!isLoading) {
                     e.currentTarget.style.boxShadow = isDark 
-                      ? '0 0 40px rgba(6,182,212,0.6)' 
+                      ? '0 0 40px rgba(0,240,255,0.6)' 
                       : '0 15px 30px rgba(14,165,233,0.4)';
                   }
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.boxShadow = isDark 
-                    ? '0 0 20px rgba(6,182,212,0.3)' 
+                    ? '0 0 20px rgba(0,240,255,0.3)' 
                     : '0 10px 20px rgba(14,165,233,0.2)';
                 }}
                 disabled={isLoading}
@@ -333,9 +333,9 @@ export default function LoginPage() {
               <Link
                 href="/register"
                 className={`font-medium transition-colors ${
-                  isDark ? 'text-cyan-400 hover:text-cyan-300' : 'text-sky-600 hover:text-sky-500'
+                  isDark ? 'text-[#00f0ff] hover:text-[#b026ff]' : 'text-sky-600 hover:text-sky-500'
                 }`}
-                style={{ textShadow: isDark ? '0 0 10px rgba(6,182,212,0.4)' : 'none' }}
+                style={{ textShadow: isDark ? '0 0 10px rgba(0,240,255,0.4)' : 'none' }}
               >
                 Buat akun baru
               </Link>
@@ -346,7 +346,7 @@ export default function LoginPage() {
         <div className="w-full lg:w-1/2 flex flex-col lg:justify-start justify-center items-center lg:items-start text-center lg:text-left">
           <div className="relative mb-5 group cursor-default">
             <div className={`absolute inset-0 rounded-full blur-[35px] transition-colors duration-700 ${
-              isDark ? 'bg-cyan-500/30 group-hover:bg-cyan-400/50' : 'bg-sky-400/20 group-hover:bg-sky-300/40'
+              isDark ? 'bg-[#00f0ff]/30 group-hover:bg-[#00f0ff]/50' : 'bg-sky-400/20 group-hover:bg-sky-300/40'
             }`}></div>
             
             <svg 
@@ -360,7 +360,7 @@ export default function LoginPage() {
               strokeLinejoin="miter" 
               className={`relative z-10 transition-all duration-500 transform group-hover:scale-105 ${
                 isDark 
-                  ? 'text-cyan-400 drop-shadow-[0_0_15px_rgba(6,182,212,0.8)] group-hover:drop-shadow-[0_0_25px_rgba(6,182,212,1)]'
+                  ? 'text-[#00f0ff] drop-shadow-[0_0_15px_rgba(0,240,255,0.8)] group-hover:drop-shadow-[0_0_25px_rgba(0,240,255,1)]'
                   : 'text-sky-600 drop-shadow-[0_5px_10px_rgba(14,165,233,0.3)] group-hover:drop-shadow-[0_8px_20px_rgba(14,165,233,0.5)]'
               }`}
             >
@@ -371,11 +371,11 @@ export default function LoginPage() {
             </svg>
           </div>
           
-          <div className={`mb-3 ${isDark ? 'drop-shadow-[0_0_15px_rgba(6,182,212,0.5)]' : 'drop-shadow-[0_4px_10px_rgba(14,165,233,0.15)]'}`}>
+          <div className={`mb-3 ${isDark ? 'drop-shadow-[0_0_15px_rgba(0,240,255,0.5)]' : 'drop-shadow-[0_4px_10px_rgba(14,165,233,0.15)]'}`}>
             <h1 
               className={`text-4xl lg:text-5xl font-black uppercase saira-stencil tracking-widest bg-clip-text text-transparent ${
                 isDark 
-                  ? 'bg-gradient-to-r from-white to-cyan-200' 
+                  ? 'bg-gradient-to-r from-[#00f0ff] to-[#b026ff]' 
                   : 'bg-gradient-to-r from-slate-900 to-sky-600'
               }`}
             >
@@ -384,7 +384,7 @@ export default function LoginPage() {
           </div>
           
           <div className={`border-l-2 pl-4 py-1 ml-1 transition-colors duration-500 ${
-            isDark ? 'border-cyan-500/60' : 'border-sky-500/50'
+            isDark ? 'border-[#00f0ff]/60' : 'border-sky-500/50'
           }`}>
             <p className={`prompt-light text-base lg:text-lg max-w-sm leading-relaxed transition-colors duration-500 ${
               isDark ? 'text-zinc-300' : 'text-slate-600'
@@ -395,10 +395,10 @@ export default function LoginPage() {
 
           {/* Label untuk Slider */}
           <div className="mt-10 lg:mt-12 w-full flex items-center opacity-90 pl-1">
-            <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors duration-500 ${isDark ? 'text-cyan-400' : 'text-sky-600'}`}>
+            <span className={`text-[10px] md:text-xs font-bold uppercase tracking-widest transition-colors duration-500 ${isDark ? 'text-[#00f0ff]' : 'text-sky-600'}`}>
               Berikut contoh portfolio user
             </span>
-            <div className={`ml-4 h-[1px] flex-grow rounded-full transition-colors duration-500 ${isDark ? 'bg-gradient-to-r from-cyan-500/50 to-transparent' : 'bg-gradient-to-r from-sky-400/50 to-transparent'}`}></div>
+            <div className={`ml-4 h-[1px] flex-grow rounded-full transition-colors duration-500 ${isDark ? 'bg-gradient-to-r from-[#00f0ff]/50 to-transparent' : 'bg-gradient-to-r from-sky-400/50 to-transparent'}`}></div>
           </div>
 
           {/* Slider Portfolio Results */}
@@ -421,7 +421,7 @@ export default function LoginPage() {
                 <div 
                   key={i} 
                   className={`min-w-[240px] lg:min-w-[280px] h-[150px] lg:h-[180px] snap-center shrink-0 relative rounded-xl overflow-hidden shadow-lg border transition-colors duration-500 group cursor-grab active:cursor-grabbing ${
-                    isDark ? 'border-cyan-500/30' : 'border-slate-300'
+                    isDark ? 'border-[#00f0ff]/30' : 'border-slate-300'
                   }`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -433,7 +433,7 @@ export default function LoginPage() {
                   }`}></div>
                   <div className="absolute bottom-4 left-4 right-4 text-left">
                     <p className="text-white font-semibold text-sm lg:text-base drop-shadow-md">{p.name}</p>
-                    <p className={`text-xs transition-colors duration-500 ${isDark ? 'text-cyan-400' : 'text-sky-300'}`}>{p.role}</p>
+                    <p className={`text-xs transition-colors duration-500 ${isDark ? 'text-[#00f0ff]' : 'text-sky-300'}`}>{p.role}</p>
                   </div>
                 </div>
               ))}
