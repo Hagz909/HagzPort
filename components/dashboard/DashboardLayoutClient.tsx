@@ -294,9 +294,18 @@ export default function DashboardLayoutClient({
         </header>
 
         <div className="flex-1 overflow-auto bg-transparent p-6 relative custom-scrollbar">
-          <div className="h-full relative z-10">
-            {children}
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={pathname}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: 'easeOut' }}
+              className="h-full relative z-10"
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </main>
     </div>
